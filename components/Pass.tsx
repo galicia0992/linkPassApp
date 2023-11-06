@@ -17,9 +17,7 @@ import {
 } from '@gluestack-ui/themed';
 import Wave from 'react-native-waves';
 import {FIREBASE_AUTH} from '../firebaseConfig';
-import {
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
+import {signInWithEmailAndPassword} from 'firebase/auth';
 const styles = StyleSheet.create({
   frame: {
     flex: 1,
@@ -37,7 +35,11 @@ interface Props {
   setShowAlert: any;
   setAlertMessage: any;
 }
-const Pass = ({navigation,setShowAlert,setAlertMessage}: Props): JSX.Element => {
+const Pass = ({
+  navigation,
+  setShowAlert,
+  setAlertMessage,
+}: Props): JSX.Element => {
   const [pass, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
@@ -103,9 +105,10 @@ const Pass = ({navigation,setShowAlert,setAlertMessage}: Props): JSX.Element => 
             isDisabled={true}
             bg="#633CFF"
             width={250}
+            size="xl"
             p="$3">
             <ButtonSpinner mr="$1" color={'white'} />
-            <ButtonText style={styles.font}  color="white" >
+            <ButtonText style={styles.font} color="white">
               Please wait...
             </ButtonText>
           </Button>

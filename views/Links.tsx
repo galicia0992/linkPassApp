@@ -1,7 +1,9 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import {StyleSheet} from 'react-native';
+import {useState} from 'react';
 import LinkCardGen from '../components/LinkCardGen';
+import ModalLinks from '../components/ModalLinks';
 const styles = StyleSheet.create({
   container: {
     padding: 16,
@@ -31,6 +33,7 @@ const styles = StyleSheet.create({
   },
 });
 const Links = (): JSX.Element => {
+  const [showModal, setShowModal] = useState(false);
   return (
     <View style={styles.container}>
       <View style={styles.cardContainer}>
@@ -41,7 +44,10 @@ const Links = (): JSX.Element => {
             elimines no las podras recuperar
           </Text>
         </View>
-        <LinkCardGen></LinkCardGen>
+        <LinkCardGen setShowModal={setShowModal}></LinkCardGen>
+        <ModalLinks
+          setShowModal={setShowModal}
+          showModal={showModal}></ModalLinks>
       </View>
     </View>
   );

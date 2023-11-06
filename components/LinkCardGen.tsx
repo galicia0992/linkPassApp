@@ -7,16 +7,21 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
 });
-
-const LinkCardGen = (): JSX.Element => {
+interface Props {
+  setShowModal: any;
+}
+const LinkCardGen = ({setShowModal}: Props): JSX.Element => {
   const [buttonPressBackground, setButtonPressBackground] = useState('white');
   const [buttoTextColor, setButtonTextColor] = useState('#633CFF');
+
   const buttonFX = (fx: string): void => {
     setButtonPressBackground(fx);
+    setShowModal(true);
+
     if (fx == '#633CFF') {
-        setButtonTextColor("white")
-    }else{
-        setButtonTextColor('#633CFF')
+      setButtonTextColor('white');
+    } else {
+      setButtonTextColor('#633CFF');
     }
   };
   return (
@@ -38,7 +43,7 @@ const LinkCardGen = (): JSX.Element => {
         onPressOut={() => {
           buttonFX('white');
         }}>
-        <ButtonIcon as={AddIcon} color={buttoTextColor}/>
+        <ButtonIcon as={AddIcon} color={buttoTextColor} />
         <ButtonText color={buttoTextColor}>Añade un nuevo link</ButtonText>
       </Button>
     </View>

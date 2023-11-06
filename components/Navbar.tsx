@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     width: '100%',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
     paddingVertical: 6,
   },
   navButton: {
