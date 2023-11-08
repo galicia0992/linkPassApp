@@ -15,15 +15,22 @@ import {
   ClockIcon,
   Icon,
   CloseIcon,
+  InputField,
+  Input,
 } from '@gluestack-ui/themed';
-
+import SelectP from './SelectP';
+import post  from '../api/post';
 interface Props {
   showModal: any;
   setShowModal: any;
 }
 
 const ModalLinks = ({showModal, setShowModal}: Props): JSX.Element => {
-  console.log(showModal + 'jjaja');
+  const [selectedCat, setSelectedCat] = useState<String>("")
+  const [linkUrl, setLinkUrl] = useState<string>("")
+  console.log(selectedCat)
+  console.log(linkUrl)
+  
   const ref = React.useRef(null);
 
   return (
@@ -36,18 +43,22 @@ const ModalLinks = ({showModal, setShowModal}: Props): JSX.Element => {
         finalFocusRef={ref}>
         <ModalBackdrop />
         <ModalContent>
-          <ModalHeader>
-            <Heading size="lg">Engage with Modals</Heading>
-            <ModalCloseButton>
-              <Icon as={CloseIcon} />
-            </ModalCloseButton>
-          </ModalHeader>
           <ModalBody>
-            <Text>
-              Elevate user interactions with our versatile modals. Seamlessly
-              integrate notifications, forms, and media displays. Make an impact
-              effortlessly.
-            </Text>
+            <ModalHeader>
+              <Heading size="md">Selecciona la categoria</Heading>
+              <ModalCloseButton>
+                <Icon as={CloseIcon} />
+              </ModalCloseButton>
+            </ModalHeader>
+            <SelectP
+            setSelectedCat={setSelectedCat}
+            ></SelectP>
+            <ModalHeader>
+              <Heading size="md">Ingresa el link</Heading>
+            </ModalHeader>
+            <Input>
+              <InputField type={'text'} placeholder="http://google.com" onChangeText={value => setLinkUrl(value)}></InputField>
+            </Input>
           </ModalBody>
           <ModalFooter>
             <Button
@@ -66,8 +77,9 @@ const ModalLinks = ({showModal, setShowModal}: Props): JSX.Element => {
               borderWidth="$0"
               onPress={() => {
                 setShowModal(false);
+                post(linkUrl, selectedCat)
               }}>
-              <ButtonText>Explore</ButtonText>
+              <ButtonText>Guardar</ButtonText>
             </Button>
           </ModalFooter>
         </ModalContent>
