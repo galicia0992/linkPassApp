@@ -60,7 +60,9 @@ const styles = StyleSheet.create({
 const Links = (): JSX.Element => {
   const [showModal, setShowModal] = useState(false);
   const [showLinkC, setShowLinkC] = useState(false);
-  console.log(getLinks());
+  const links = [getLinks()]
+  
+ 
   return (
     <View style={styles.container}>
       <View style={styles.cardContainer}>
@@ -80,7 +82,7 @@ const Links = (): JSX.Element => {
             <Text style={styles.inicia}>Inicia desde aqui</Text>
             <Text style={styles.font}>
               Usa el boton "Añade un nuevo link" para iniciar. una vez que
-              tengas un Link, podras editarlo{' '}
+              tengas un Link, podras editarlo.{' '}
             </Text>
           </Box>
         ) : (

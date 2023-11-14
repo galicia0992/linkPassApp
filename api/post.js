@@ -1,9 +1,11 @@
-import { getDatabase, ref, set } from "firebase/database"
+import { getDatabase, ref, set, push } from "firebase/database"
 const post = (link, categoria) =>{
     const db = getDatabase()
-    set(ref(db, "dbLinks/" + Date.now()),{
+    const newPush = push(ref(db, "dbLinks/" + 0),{
         Category: categoria,
         Link: link
     })
+    const elKey = newPush.key
+    console.log(elKey)
 }
 export default post
