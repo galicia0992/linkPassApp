@@ -28,8 +28,6 @@ interface Props {
 const ModalLinks = ({showModal, setShowModal}: Props): JSX.Element => {
   const [selectedCat, setSelectedCat] = useState<String>("")
   const [linkUrl, setLinkUrl] = useState<string>("")
-  console.log(selectedCat)
-  console.log(linkUrl)
   
   const ref = React.useRef(null);
 

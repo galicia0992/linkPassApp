@@ -1,10 +1,10 @@
 import React from 'react';
 import {Text, View, StyleSheet, Image} from 'react-native';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import LinkCardGen from '../components/LinkCardGen';
 import ModalLinks from '../components/ModalLinks';
 import {ScrollView, Box} from '@gluestack-ui/themed';
-import getLinks from '../api/get';
+import {getDatabase, ref, child, get, onValue} from 'firebase/database';
 
 const styles = StyleSheet.create({
   container: {
@@ -57,12 +57,23 @@ const styles = StyleSheet.create({
     color: 'grey',
   },
 });
+
 const Links = (): JSX.Element => {
   const [showModal, setShowModal] = useState(false);
   const [showLinkC, setShowLinkC] = useState(false);
-  const links = [getLinks()]
+  const [listaLinks, setListaLinks] = useState([])
   
+  useEffect(() => {
+    const dbRef = ref(getDatabase());
+    onValue(dbRef, (snapshot) =>{
+      const data = snapshot.val()
+      Object.values(data).map(item =>{
+        setListaLinks(Object.values(item[0]))
+      })
+    })
+  }, [])
  
+
   return (
     <View style={styles.container}>
       <View style={styles.cardContainer}>
@@ -84,6 +95,11 @@ const Links = (): JSX.Element => {
               Usa el boton "Añade un nuevo link" para iniciar. una vez que
               tengas un Link, podras editarlo.{' '}
             </Text>
+            {
+              listaLinks.map(item =>{
+                return <Text>{item.Category}</Text>
+              })
+            }
           </Box>
         ) : (
           <ScrollView>
