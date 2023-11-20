@@ -4,7 +4,8 @@ import {useState, useEffect} from 'react';
 import LinkCardGen from '../components/LinkCardGen';
 import ModalLinks from '../components/ModalLinks';
 import {ScrollView, Box} from '@gluestack-ui/themed';
-import {getDatabase, ref, child, get, onValue} from 'firebase/database';
+import LinksComponent from '../components/LinksComponent';
+import getLinks from '../api/get.js';
 
 const styles = StyleSheet.create({
   container: {
@@ -59,19 +60,10 @@ const styles = StyleSheet.create({
 });
 
 const Links = (): JSX.Element => {
-  const [showModal, setShowModal] = useState(false);
-  const [showLinkC, setShowLinkC] = useState(false);
-  const [listaLinks, setListaLinks] = useState([])
-  
-  useEffect(() => {
-    const dbRef = ref(getDatabase());
-    onValue(dbRef, (snapshot) =>{
-      const data = snapshot.val()
-      Object.values(data).map(item =>{
-        setListaLinks(Object.values(item[0]))
-      })
-    })
-  }, [])
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [showLinkC, setShowLinkC] = useState<boolean>(false);
+  const [totalLinks, setTotalLinks] = useState<number>(0)
+  console.log(totalLinks)
  
 
   return (
@@ -85,7 +77,7 @@ const Links = (): JSX.Element => {
           </Text>
         </View>
         <LinkCardGen setShowModal={setShowModal}></LinkCardGen>
-        {!showLinkC ? (
+        {showLinkC == false ? (
           <Box style={styles.boxNewLink}>
             <Image
               style={styles.logo}
@@ -95,15 +87,13 @@ const Links = (): JSX.Element => {
               Usa el boton "Añade un nuevo link" para iniciar. una vez que
               tengas un Link, podras editarlo.{' '}
             </Text>
-            {
-              listaLinks.map(item =>{
-                return <Text>{item.Category}</Text>
-              })
-            }
           </Box>
         ) : (
           <ScrollView>
-            <View style={{paddingBottom: '100%'}}></View>
+            <LinksComponent
+            setShowLinkC={setShowLinkC}
+            setTotalLinks={setTotalLinks}
+            ></LinksComponent>
           </ScrollView>
         )}
       </View>

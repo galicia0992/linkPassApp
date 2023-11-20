@@ -1,15 +1,13 @@
-import { getDatabase, ref, child, get, onChildAdded } from "firebase/database";
+import { getDatabase, ref, child, get, onChildAdded, onValue } from "firebase/database";
 
-const getLinks = async() =>{
-    const dbRef = ref(getDatabase());
-get(onChildAdded(dbRef, `dbLinks/`)).then((snapshot) => {
-  if (snapshot.exists()) {
-    console.log(snapshot.val());
-  } else {
-    console.log("No data available");
-  }
-}).catch((error) => {
-  console.error(error);
-});
+
+const getLinks = async(setListaLinks) =>{
+  const dbRef = ref(getDatabase());
+  onValue(dbRef, (snapshot) =>{
+    const data = snapshot.val()
+    Object.values(data).map(item =>{
+      setListaLinks(Object.values(item[0]))
+    })
+  })
 }
 export default getLinks
