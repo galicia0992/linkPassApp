@@ -5,6 +5,7 @@ import {Button, ButtonText, ButtonIcon, AddIcon} from '@gluestack-ui/themed';
 const styles = StyleSheet.create({
   linksContainer: {
     marginTop: 40,
+    marginBottom:20
   },
 });
 interface Props {

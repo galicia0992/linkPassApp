@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: '100%',
     height: '98%',
-    padding: 24,
+
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
   },
@@ -62,9 +62,13 @@ const styles = StyleSheet.create({
 const Links = (): JSX.Element => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showLinkC, setShowLinkC] = useState<boolean>(false);
-  const [totalLinks, setTotalLinks] = useState<number>(0)
-  console.log(totalLinks)
- 
+  const [totalLinks, setTotalLinks] = useState<number>(0);
+  const [listaLinks, setListaLinks] = useState<any[]>([]);
+  useEffect(() => {
+    getLinks(setListaLinks)
+    listaLinks.length == 1 ? setShowLinkC(false):setShowLinkC(true)
+  }, [])
+  
 
   return (
     <View style={styles.container}>
@@ -90,10 +94,7 @@ const Links = (): JSX.Element => {
           </Box>
         ) : (
           <ScrollView>
-            <LinksComponent
-            setShowLinkC={setShowLinkC}
-            setTotalLinks={setTotalLinks}
-            ></LinksComponent>
+            <LinksComponent></LinksComponent>
           </ScrollView>
         )}
       </View>

@@ -29,41 +29,41 @@ const SelectP = ({setSelectedCat}: Props):JSX.Element => {
           value="dev"
           isDisabled={true}
         />
-        <SelectItem label="Github" value="github" />
-        <SelectItem label="Deploys" value="deploys" />
+        <SelectItem label="Github" value="Github" />
+        <SelectItem label="Deploys" value="Deploys" />
         <SelectItem
           label="Librerias"
           value="Librerias"
         />
         <SelectItem
           label="Redes sociales"
-          value="sociales"
+          value="Redes sociales"
           isDisabled={true}
         />
         <SelectItem
           label="Facebook"
-          value="facebook"
+          value="Facebook"
         />
         <SelectItem
           label="Youtube"
-          value="youtube"
+          value="Youtube"
         />
         <SelectItem
           label="X"
-          value="x"
+          value="X"
         />
         <SelectItem
           label="Instagram"
-          value="instagram"
+          value="Instagram"
         />
          <SelectItem
           label="Sitios Web"
-          value="web"
+          value="Sitios Web"
           isDisabled={true}
         />
         <SelectItem
           label="Otros"
-          value="otros"
+          value="Otros"
         />
       </SelectContent>
     </SelectPortal>
