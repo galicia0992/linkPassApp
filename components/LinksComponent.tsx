@@ -7,23 +7,23 @@ import {Input, InputField} from '@gluestack-ui/themed';
 const styles = StyleSheet.create({
   card: {
     borderStyle: 'solid',
-    width: 240,
+    borderRadius:10,
+    width: "98%",
     height: 'auto',
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 15,
     marginHorizontal: 50,
-    backgroundColor: 'white',
+    backgroundColor: '#FFFF',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 5,
+      height: 7,
     },
-    shadowOpacity: 0.34,
-    shadowRadius: 6.27,
-
+    shadowOpacity: 0.24,
+    shadowRadius: 3.27,
     elevation: 10,
+    padding: 10
   },
   inputContainer: {
     width: 150,
@@ -50,11 +50,15 @@ const LinksComponent = () => {
       {listaLinks.map(item => {
         return (
           <View key={item.id} style={styles.card}>
+            <View>
+                <Text>{`Link id: ${item.id}`}</Text>
+              </View>
             <View style={styles.inputContainer}>
-              <Text style={{marginBottom: 10}}>{'Categoria'}</Text>
+              <Text style={{marginBottom: 10, fontSize:10}}>{'Categoria'}</Text>
               <Input
                 variant="underlined"
                 size="sm"
+                w={170}
                 isDisabled={false}
                 isInvalid={false}
                 isReadOnly={true}>
@@ -65,10 +69,11 @@ const LinksComponent = () => {
               </Input>
             </View>
             <View style={styles.inputContainer}>
-              <Text style={{marginBottom: 10}}>{'Link'}</Text>
+              <Text style={{marginBottom: 10, fontSize:10}}>{'Link'}</Text>
               <Input
                 variant="outline"
                 size="sm"
+                w={170}
                 isDisabled={false}
                 isInvalid={false}
                 isReadOnly={false}>

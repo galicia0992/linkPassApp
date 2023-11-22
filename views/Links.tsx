@@ -16,9 +16,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: '100%',
     height: '98%',
-
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
+    paddingTop:10,
+    paddingHorizontal:10
   },
   textHeader: {
     fontFamily: 'InstrumentSans-Regular',
