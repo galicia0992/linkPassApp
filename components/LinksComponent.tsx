@@ -1,19 +1,20 @@
-import {View, Text, StyleSheet, ClipboardStatic} from 'react-native';
+import {View, Text, StyleSheet, Pressable} from 'react-native';
 import React from 'react';
 import {useState, useEffect} from 'react';
 import getLinks from '../api/get.js';
 import {Input, InputField} from '@gluestack-ui/themed';
+import ModalLinksDelete from './ModalLinksDelete';
 
 const styles = StyleSheet.create({
   card: {
     borderStyle: 'solid',
     borderRadius:10,
-    width: "98%",
+    width: "96%",
     height: 'auto',
-    flex: 1,
+    flexDirection:"column",
     justifyContent: 'center',
+    alignItems:"center",
     marginVertical: 15,
-    marginHorizontal: 50,
     backgroundColor: '#FFFF',
     shadowColor: '#000',
     shadowOffset: {
@@ -23,22 +24,30 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.24,
     shadowRadius: 3.27,
     elevation: 10,
-    padding: 10
+    paddingTop:10
   },
   inputContainer: {
-    width: 150,
+    width: 200,
     marginVertical: 17,
   },
+  headCard:{
+    flexDirection:"row",
+    alignItems:"center",
+    with:"100%",
+    justifyContent:"space-between",
+    marginBottom:20
+  }
 });
 
 const LinksComponent = () => {
   const [listaLinks, setListaLinks] = useState<any[]>([]);
-  const [copied, setCopied] = useState<String>('');
+  const [showModalDelete, setShowModalDelete] = useState<Boolean>(false)
+  const [removeId, setRemoveId] = useState<number>(0)
 
   useEffect(() => {
     getLinks(setListaLinks);
   }, []);
-
+  console.log(listaLinks)
   return (
     <View
       style={{
@@ -47,18 +56,30 @@ const LinksComponent = () => {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
+        <View style={{position:"absolute"}}>
+        {
+          showModalDelete ? <ModalLinksDelete
+          showModalDelete={showModalDelete}
+          setShowModalDelete={setShowModalDelete}
+          removeId={removeId}
+          ></ModalLinksDelete>:""
+        }
+        </View>
       {listaLinks.map(item => {
         return (
           <View key={item.id} style={styles.card}>
-            <View>
-                <Text>{`Link id: ${item.id}`}</Text>
-              </View>
             <View style={styles.inputContainer}>
+            <View style={styles.headCard}>
+                <Text style={{fontSize:10}}>{`Link id: ${item.id}`}</Text>
+                <Pressable
+                onPress={() => (setShowModalDelete(true), setRemoveId(item.id))}
+                ><Text>Remover</Text></Pressable>
+            </View>
               <Text style={{marginBottom: 10, fontSize:10}}>{'Categoria'}</Text>
               <Input
                 variant="underlined"
                 size="sm"
-                w={170}
+                w={200}
                 isDisabled={false}
                 isInvalid={false}
                 isReadOnly={true}>
@@ -73,7 +94,8 @@ const LinksComponent = () => {
               <Input
                 variant="outline"
                 size="sm"
-                w={170}
+                borderRadius={6}
+                w={200}
                 isDisabled={false}
                 isInvalid={false}
                 isReadOnly={false}>

@@ -30,6 +30,7 @@ const LinkCardGen = ({setShowModal}: Props): JSX.Element => {
       <Button
         marginTop={19}
         size="md"
+        borderColor={'#633CFF'}
         variant="outline"
         action="primary"
         isDisabled={false}

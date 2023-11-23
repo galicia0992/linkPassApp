@@ -94,7 +94,7 @@ const Links = (): JSX.Element => {
             </Text>
           </Box>
         ) : (
-          <ScrollView>
+          <ScrollView style={{width:"90%"}}>
             <LinksComponent></LinksComponent>
           </ScrollView>
         )}
