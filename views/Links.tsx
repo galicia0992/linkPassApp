@@ -67,7 +67,9 @@ const Links = (): JSX.Element => {
   
   useEffect(() => {
     getLinks(setListaLinks)
-    listaLinks.length == 1 ? setShowLinkC(false):setShowLinkC(true)
+    
+    
+    
   }, [])
   
 
@@ -82,7 +84,7 @@ const Links = (): JSX.Element => {
           </Text>
         </View>
         <LinkCardGen setShowModal={setShowModal}></LinkCardGen>
-        {showLinkC == false ? (
+        {listaLinks.length == 1 ? (
           <Box style={styles.boxNewLink}>
             <Image
               style={styles.logo}

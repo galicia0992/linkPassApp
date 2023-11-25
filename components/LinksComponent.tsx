@@ -46,8 +46,10 @@ const LinksComponent = () => {
   const [idListas, setIdListas] = useState<any[]>([])
   const [keyList, setKeyList] = useState<number>(0)
   useEffect(() => {
+    
     getLinks(setListaLinks);
     getLinksToRemove(setIdListas)
+    console.log(listaLinks)
   }, []);
   
   
@@ -71,45 +73,45 @@ const LinksComponent = () => {
         </View>
       {listaLinks.map((item, i) => {
         return (
-          <View key={i} style={styles.card}>
-            <View style={styles.inputContainer}>
-            <View style={styles.headCard}>
-                <Text style={{fontSize:10}}>{`Link id: ${item.id}`}</Text>
-                <Pressable
-                onPress={() => (setShowModalDelete(true), setKeyList(i))}
-                ><Text>Remover</Text></Pressable>
-            </View>
-              <Text style={{marginBottom: 10, fontSize:10}}>{'Categoria'}</Text>
-              <Input
-                variant="underlined"
-                size="sm"
-                w={200}
-                isDisabled={false}
-                isInvalid={false}
-                isReadOnly={true}>
-                <InputField
-                  placeholder="Enter Text here"
-                  value={`${item.category}`}
-                />
-              </Input>
-            </View>
-            <View style={styles.inputContainer}>
-              <Text style={{marginBottom: 10, fontSize:10}}>{'Link'}</Text>
-              <Input
-                variant="outline"
-                size="sm"
-                borderRadius={6}
-                w={200}
-                isDisabled={false}
-                isInvalid={false}
-                isReadOnly={false}>
-                <InputField
-                  placeholder="Enter Text here"
-                  value={`${item.link}`}
-                />
-              </Input>
-            </View>
+          item.category == "" ? "": <View key={i} style={styles.card}>
+          <View style={styles.inputContainer}>
+          <View style={styles.headCard}>
+              <Text style={{fontSize:10}}>{`Link id: ${item.id}`}</Text>
+              <Pressable
+              onPress={() => (setShowModalDelete(true), setKeyList(i))}
+              ><Text>Remover</Text></Pressable>
           </View>
+            <Text style={{marginBottom: 10, fontSize:10}}>{'Categoria'}</Text>
+            <Input
+              variant="underlined"
+              size="sm"
+              w={200}
+              isDisabled={false}
+              isInvalid={false}
+              isReadOnly={true}>
+              <InputField
+                placeholder="Enter Text here"
+                value={`${item.category}`}
+              />
+            </Input>
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={{marginBottom: 10, fontSize:10}}>{'Link'}</Text>
+            <Input
+              variant="outline"
+              size="sm"
+              borderRadius={6}
+              w={200}
+              isDisabled={false}
+              isInvalid={false}
+              isReadOnly={false}>
+              <InputField
+                placeholder="Enter Text here"
+                value={`${item.link}`}
+              />
+            </Input>
+          </View>
+        </View>
         );
       })}
     </View>
