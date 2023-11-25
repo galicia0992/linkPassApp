@@ -19,18 +19,30 @@ import {
   Input,
 } from '@gluestack-ui/themed';
 import SelectP from './SelectP';
-import post  from '../api/post';
+import post from '../api/post';
 interface Props {
   showModal: any;
   setShowModal: any;
 }
 
 const ModalLinks = ({showModal, setShowModal}: Props): JSX.Element => {
-  const [selectedCat, setSelectedCat] = useState<String>("")
-  const [linkUrl, setLinkUrl] = useState<string>("")
-  
-  const ref = React.useRef(null);
+  const [selectedCat, setSelectedCat] = useState<String>('');
+  const [linkUrl, setLinkUrl] = useState<string>('');
+  const [errLink, setErrLink] = useState<string>('');
 
+  const ref = React.useRef(null);
+  const catchPost = () => {
+    setSelectedCat('');
+    setLinkUrl('');
+    if (selectedCat == '' || linkUrl == '') {
+      setErrLink('$error300');
+      console.log('te falta algo');
+    } else {
+      post(linkUrl, selectedCat);
+      setShowModal(false);
+      setErrLink('$coolGray300');
+    }
+  };
   return (
     <Center h={300}>
       <Modal
@@ -48,14 +60,15 @@ const ModalLinks = ({showModal, setShowModal}: Props): JSX.Element => {
                 <Icon as={CloseIcon} />
               </ModalCloseButton>
             </ModalHeader>
-            <SelectP
-            setSelectedCat={setSelectedCat}
-            ></SelectP>
+            <SelectP setSelectedCat={setSelectedCat}></SelectP>
             <ModalHeader>
               <Heading size="md">Ingresa el link</Heading>
             </ModalHeader>
-            <Input>
-              <InputField type={'text'} placeholder="http://google.com" onChangeText={value => setLinkUrl(value)}></InputField>
+            <Input borderColor={errLink}>
+              <InputField
+                type={'text'}
+                placeholder="http://google.com"
+                onChangeText={value => setLinkUrl(value)}></InputField>
             </Input>
           </ModalBody>
           <ModalFooter>
@@ -66,6 +79,7 @@ const ModalLinks = ({showModal, setShowModal}: Props): JSX.Element => {
               mr="$3"
               onPress={() => {
                 setShowModal(false);
+                setErrLink('$coolGray300');
               }}>
               <ButtonText>Cancel</ButtonText>
             </Button>
@@ -74,8 +88,7 @@ const ModalLinks = ({showModal, setShowModal}: Props): JSX.Element => {
               action="positive"
               borderWidth="$0"
               onPress={() => {
-                setShowModal(false);
-                post(linkUrl, selectedCat)
+                catchPost();
               }}>
               <ButtonText>Guardar</ButtonText>
             </Button>
@@ -87,5 +100,3 @@ const ModalLinks = ({showModal, setShowModal}: Props): JSX.Element => {
 };
 
 export default ModalLinks;
-
-const styles = StyleSheet.create({});
