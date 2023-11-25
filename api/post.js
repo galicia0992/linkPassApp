@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, push } from "firebase/database"
+import { getDatabase, ref, push } from "firebase/database"
 const post = (link, categoria) =>{
     const db = getDatabase()
     push(ref(db, "dbLinks/" + 0),{

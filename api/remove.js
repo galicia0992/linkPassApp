@@ -3,8 +3,7 @@ import database from "../firebaseConfig"
 
 
 const remover = (id) =>{
-    const dbRef = ref(getDatabase());
-    remove(ref(dbRef, `dbLinks/0/` + id));
+    remove(ref(getDatabase(), `dbLinks/0/${id}`));
 }
 
 export default remover

@@ -2,6 +2,7 @@ import {View, Text, StyleSheet, Pressable} from 'react-native';
 import React from 'react';
 import {useState, useEffect} from 'react';
 import getLinks from '../api/get.js';
+import getLinksToRemove from '../api/getToRemove.js';
 import {Input, InputField} from '@gluestack-ui/themed';
 import ModalLinksDelete from './ModalLinksDelete';
 
@@ -42,12 +43,14 @@ const styles = StyleSheet.create({
 const LinksComponent = () => {
   const [listaLinks, setListaLinks] = useState<any[]>([]);
   const [showModalDelete, setShowModalDelete] = useState<Boolean>(false)
-  const [removeId, setRemoveId] = useState<number>(0)
-
+  const [idListas, setIdListas] = useState<any[]>([])
+  const [keyList, setKeyList] = useState<number>(0)
   useEffect(() => {
     getLinks(setListaLinks);
+    getLinksToRemove(setIdListas)
   }, []);
-  console.log(listaLinks)
+  
+  
   return (
     <View
       style={{
@@ -61,18 +64,19 @@ const LinksComponent = () => {
           showModalDelete ? <ModalLinksDelete
           showModalDelete={showModalDelete}
           setShowModalDelete={setShowModalDelete}
-          removeId={removeId}
+          idListas={idListas}
+          keyList={keyList}
           ></ModalLinksDelete>:""
         }
         </View>
-      {listaLinks.map(item => {
+      {listaLinks.map((item, i) => {
         return (
-          <View key={item.id} style={styles.card}>
+          <View key={i} style={styles.card}>
             <View style={styles.inputContainer}>
             <View style={styles.headCard}>
                 <Text style={{fontSize:10}}>{`Link id: ${item.id}`}</Text>
                 <Pressable
-                onPress={() => (setShowModalDelete(true), setRemoveId(item.id))}
+                onPress={() => (setShowModalDelete(true), setKeyList(i))}
                 ><Text>Remover</Text></Pressable>
             </View>
               <Text style={{marginBottom: 10, fontSize:10}}>{'Categoria'}</Text>

@@ -63,8 +63,8 @@ const styles = StyleSheet.create({
 const Links = (): JSX.Element => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showLinkC, setShowLinkC] = useState<boolean>(false);
-  const [totalLinks, setTotalLinks] = useState<number>(0);
   const [listaLinks, setListaLinks] = useState<any[]>([]);
+  
   useEffect(() => {
     getLinks(setListaLinks)
     listaLinks.length == 1 ? setShowLinkC(false):setShowLinkC(true)

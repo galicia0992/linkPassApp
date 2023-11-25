@@ -23,13 +23,19 @@ import remover from '../api/remove';
 interface Props {
   showModalDelete: any;
   setShowModalDelete: any;
-  removeId:any
+  idListas:any,
+  keyList:any
 }
 
-const ModalLinksDelete = ({showModalDelete, setShowModalDelete, removeId}: Props): JSX.Element => {
- 
-  console.log(removeId)
+const ModalLinksDelete = ({showModalDelete, setShowModalDelete, idListas, keyList}: Props): JSX.Element => {
+
   const ref = React.useRef(null);
+  const arr: string[] = []
+  Object.keys(idListas[0]).map((item)=>{
+    arr.push(item)
+  })
+  
+  
 
   return (
     <Center h={300}>
@@ -67,7 +73,7 @@ const ModalLinksDelete = ({showModalDelete, setShowModalDelete, removeId}: Props
               borderWidth="$0"
               onPress={() => {
                 setShowModalDelete(false),
-                remover(removeId)
+                remover(arr[keyList])
               }}>
               <ButtonText>Eliminar</ButtonText>
             </Button>
