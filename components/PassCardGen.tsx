@@ -40,7 +40,7 @@ const PassCardGen = ({setShowModal}: Props): JSX.Element => {
         backgroundColor={buttonPressBackground}
         borderRadius={13}
         onPressIn={() => {
-          buttonFX('#633CFF');
+          buttonFX('#633CFF')
         }}
         onPressOut={() => {
           buttonFX('white');
