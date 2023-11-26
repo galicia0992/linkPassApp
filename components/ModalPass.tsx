@@ -18,7 +18,7 @@ import {
   InputField,
   Input,
 } from '@gluestack-ui/themed';
-import SelectP from './SelectP';
+import SelectPPass from './SelectPPass';
 import postPass from '../api/postPass';
 interface Props {
   showModal: any;
@@ -60,14 +60,14 @@ const ModalPass = ({showModal, setShowModal}: Props): JSX.Element => {
                 <Icon as={CloseIcon} />
               </ModalCloseButton>
             </ModalHeader>
-            <SelectP setSelectedCat={setSelectedCat}></SelectP>
+            <SelectPPass setSelectedCat={setSelectedCat}></SelectPPass>
             <ModalHeader>
-              <Heading size="md">Ingresa el passowrd</Heading>
+              <Heading size="md">Ingresa el password</Heading>
             </ModalHeader>
             <Input borderColor={errLink}>
               <InputField
                 type={'text'}
-                placeholder="http://google.com"
+                placeholder="Ingrese password"
                 onChangeText={value => setPassword(value)}></InputField>
             </Input>
           </ModalBody>
