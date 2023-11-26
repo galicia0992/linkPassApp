@@ -95,7 +95,7 @@ const PasswordsComponent = () => {
             </Input>
           </View>
           <View style={styles.inputContainer}>
-            <Text style={{marginBottom: 10, fontSize:10}}>{'Link'}</Text>
+            <Text style={{marginBottom: 10, fontSize:10}}>{'Password'}</Text>
             <Input
               variant="outline"
               size="sm"
