@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { ChevronDownIcon, Icon, Select, SelectBackdrop, SelectContent, SelectDragIndicator, SelectDragIndicatorWrapper, SelectIcon, SelectInput, SelectItem, SelectPortal, SelectTrigger } from '@gluestack-ui/themed'
 
 interface Props {
-  setSelectedCat:any
+  setSelectedCat:any,
 }
 
 const SelectPPass = ({setSelectedCat}: Props):JSX.Element => {
