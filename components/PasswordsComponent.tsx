@@ -48,7 +48,7 @@ const PasswordsComponent = () => {
   useEffect(() => {
     getPass(setListaPass);
     getLinksToRemove(setIdListas)
-    console.log(listaPass)
+    console.log(listaPass);
   }, []);
   
   
