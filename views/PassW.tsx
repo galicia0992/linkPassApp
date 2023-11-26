@@ -95,7 +95,7 @@ const PassW = (): JSX.Element => {
           <ScrollView style={{width:"90%"}}>
             <PasswordsComponent></PasswordsComponent>
           </ScrollView>
-        )}
+        )}.
       </View>
       <ModalLinks
         setShowModal={setShowModal}
