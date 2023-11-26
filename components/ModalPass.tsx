@@ -27,17 +27,19 @@ interface Props {
 const ModalPass = ({showModal, setShowModal}: Props): JSX.Element => {
   const [selectedCat, setSelectedCat] = useState<String>('');
   const [password, setPassword] = useState<string>('');
+  const [user, setUser] = useState<string>("")
   const [errLink, setErrLink] = useState<string>('');
 
   const ref = React.useRef(null);
   const catchPost = () => {
     setSelectedCat('');
     setPassword('');
+    setUser("")
     if (selectedCat == '' || password == '') {
       setErrLink('$error300');
       console.log('te falta algo');
     } else {
-      postPass(password, selectedCat);
+      postPass(password, selectedCat, user);
       setShowModal(false);
       setErrLink('$coolGray300');
     }
@@ -60,6 +62,15 @@ const ModalPass = ({showModal, setShowModal}: Props): JSX.Element => {
               </ModalCloseButton>
             </ModalHeader>
             <SelectPPass setSelectedCat={setSelectedCat}></SelectPPass>
+            <ModalHeader>
+              <Heading size="md">Ingresa el usuario</Heading>
+            </ModalHeader>
+            <Input borderColor={errLink}>
+              <InputField
+                type={'text'}
+                placeholder="Ingrese password"
+                onChangeText={value => setUser(value)}></InputField>
+            </Input>
             <ModalHeader>
               <Heading size="md">Ingresa el password</Heading>
             </ModalHeader>

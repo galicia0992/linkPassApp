@@ -48,7 +48,6 @@ const PasswordsComponent = () => {
   useEffect(() => {
     getPass(setListaPass);
     getLinksToRemove(setIdListas)
-    console.log(listaPass);
   }, []);
   
   
@@ -91,6 +90,22 @@ const PasswordsComponent = () => {
               <InputField
                 placeholder="Enter Text here"
                 value={`${item.category}`}
+              />
+            </Input>
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={{marginBottom: 10, fontSize:10}}>{'Usuario'}</Text>
+            <Input
+              variant="underlined"
+              size="sm"
+              borderRadius={6}
+              w={200}
+              isDisabled={false}
+              isInvalid={false}
+              isReadOnly={false}>
+              <InputField
+                placeholder="Enter Text here"
+                value={`${item.user}`}
               />
             </Input>
           </View>
