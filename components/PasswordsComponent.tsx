@@ -1,10 +1,10 @@
 import {View, Text, StyleSheet, Pressable} from 'react-native';
 import React from 'react';
 import {useState, useEffect} from 'react';
-import getLinks from '../api/get.js';
 import getLinksToRemove from '../api/getToRemove.js';
 import {Input, InputField} from '@gluestack-ui/themed';
-import ModalLinksDelete from './ModalLinksDelete';
+import ModalPassDelete from './ModalPassDelete';
+import getPass from '../api/getPass.js';
 
 const styles = StyleSheet.create({
   card: {
@@ -41,15 +41,14 @@ const styles = StyleSheet.create({
 });
 
 const PasswordsComponent = () => {
-  const [listaLinks, setListaLinks] = useState<any[]>([]);
+  const [listaPass, setListaPass] = useState<any[]>([]);
   const [showModalDelete, setShowModalDelete] = useState<Boolean>(false)
   const [idListas, setIdListas] = useState<any[]>([])
   const [keyList, setKeyList] = useState<number>(0)
   useEffect(() => {
-    
-    getLinks(setListaLinks);
+    getPass(setListaPass);
     getLinksToRemove(setIdListas)
-    console.log(listaLinks)
+    console.log(listaPass)
   }, []);
   
   
@@ -63,15 +62,15 @@ const PasswordsComponent = () => {
       }}>
         <View style={{position:"absolute"}}>
         {
-          showModalDelete ? <ModalLinksDelete
+          showModalDelete ? <ModalPassDelete
           showModalDelete={showModalDelete}
           setShowModalDelete={setShowModalDelete}
           idListas={idListas}
           keyList={keyList}
-          ></ModalLinksDelete>:""
+          ></ModalPassDelete>:""
         }
         </View>
-      {listaLinks.map((item, i) => {
+      {listaPass.map((item, i) => {
         return (
           item.category == "" ? "": <View key={i} style={styles.card}>
           <View style={styles.inputContainer}>
@@ -107,7 +106,7 @@ const PasswordsComponent = () => {
               isReadOnly={false}>
               <InputField
                 placeholder="Enter Text here"
-                value={`${item.link}`}
+                value={`${item.pass}`}
               />
             </Input>
           </View>

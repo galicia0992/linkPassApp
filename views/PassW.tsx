@@ -1,11 +1,12 @@
 import React from 'react';
 import {Text, View, StyleSheet, Image} from 'react-native';
 import {useState, useEffect} from 'react';
-import PassCardGen from '../components/LinkCardGen';
-import ModalLinks from '../components/ModalLinks';
+import PassCardGen from '../components/PassCardGen';
+import ModalPass from '../components/ModalPass';
 import {ScrollView, Box} from '@gluestack-ui/themed';
 import PasswordsComponent from '../components/PasswordsComponent';
-import getLinks from '../api/get.js';
+
+import getPass from '../api/getPass';
 
 const styles = StyleSheet.create({
   container: {
@@ -62,10 +63,11 @@ const styles = StyleSheet.create({
 
 const PassW = (): JSX.Element => {
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [listaLinks, setListaLinks] = useState<any[]>([]);
+  const [listaPass, setListaPass] = useState<any[]>([]);
   
   useEffect(() => {
-    getLinks(setListaLinks)
+    getPass(setListaPass)
+    console.log(listaPass)
   }, [])
   
 
@@ -80,7 +82,7 @@ const PassW = (): JSX.Element => {
           </Text>
         </View>
         <PassCardGen setShowModal={setShowModal}></PassCardGen>
-        {listaLinks.length == 1 ? (
+        {listaPass.length == 1 ? (
           <Box style={styles.boxNewLink}>
             <Image
               style={styles.logo}
@@ -97,9 +99,9 @@ const PassW = (): JSX.Element => {
           </ScrollView>
         )}
       </View>
-      <ModalLinks
+      <ModalPass
         setShowModal={setShowModal}
-        showModal={showModal}></ModalLinks>
+        showModal={showModal}></ModalPass>
     </View>
   );
 };

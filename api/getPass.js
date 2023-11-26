@@ -1,15 +1,14 @@
 import { getDatabase, ref, onValue } from "firebase/database";
 
 
-const getLinks = async(setListaLinks) =>{
+const getPass = async(setListaPass) =>{
   const dbRef = ref(getDatabase());
   
   onValue(dbRef, (snapshot) =>{
     const data = snapshot.val()
     Object.values(data).map(item =>{
-      setListaLinks(Object.values(item[0]))
-      
+      setListaPass(Object.values(item[1]))
     })
   })
 }
-export default getLinks
+export default getPass
