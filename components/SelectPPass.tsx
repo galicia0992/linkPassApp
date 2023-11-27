@@ -5,13 +5,14 @@ import { ChevronDownIcon, Icon, Select, SelectBackdrop, SelectContent, SelectDra
 
 interface Props {
   setSelectedCat:any,
+  setShowErrCat:any
 }
 
-const SelectPPass = ({setSelectedCat}: Props):JSX.Element => {
+const SelectPPass = ({setSelectedCat, setShowErrCat}: Props):JSX.Element => {
   
   return (
     
-    <Select onValueChange={(value) => setSelectedCat(value)}>
+    <Select borderColor={"$amber100"} onValueChange={(value) => {setSelectedCat(value); setShowErrCat(false)}}>
     <SelectTrigger variant="outline" size="md" >
       <SelectInput placeholder="Dominio" />
       <SelectIcon mr="$3">

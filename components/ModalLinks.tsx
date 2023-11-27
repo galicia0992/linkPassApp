@@ -28,19 +28,29 @@ interface Props {
 const ModalLinks = ({showModal, setShowModal}: Props): JSX.Element => {
   const [selectedCat, setSelectedCat] = useState<String>('');
   const [linkUrl, setLinkUrl] = useState<string>('');
-  const [errLink, setErrLink] = useState<string>('');
+  const [errLink, setErrLink] = useState<string>('$coolGray300');
+  const [showErrCat, setShowErrCat] = useState<boolean>(false);
+  const [showErrLink, setShowErrLink] = useState<boolean>(false);
 
   const ref = React.useRef(null);
   const catchPost = () => {
-    setSelectedCat('');
-    setLinkUrl('');
-    if (selectedCat == '' || linkUrl == '') {
-      setErrLink('$error300');
-      console.log('te falta algo');
+    if (selectedCat.length == 0) {
+      setShowErrCat(true);
     } else {
+      setShowErrCat(false);
+    }
+    if (linkUrl.length == 0) {
+      setErrLink('$error300');
+      setShowErrLink(true);
+    } else {
+      setErrLink('$coolGray300');
+    }
+
+    if (selectedCat !== '' && linkUrl !== '') {
       post(linkUrl, selectedCat);
       setShowModal(false);
-      setErrLink('$coolGray300');
+      setSelectedCat('');
+      setLinkUrl('');
     }
   };
   return (
@@ -49,6 +59,11 @@ const ModalLinks = ({showModal, setShowModal}: Props): JSX.Element => {
         isOpen={showModal}
         onClose={() => {
           setShowModal(false);
+          setShowErrCat(false);
+          setShowErrLink(false);
+          setErrLink('$coolGray300');
+          setSelectedCat('');
+          setLinkUrl('');
         }}
         finalFocusRef={ref}>
         <ModalBackdrop />
@@ -60,7 +75,8 @@ const ModalLinks = ({showModal, setShowModal}: Props): JSX.Element => {
                 <Icon as={CloseIcon} />
               </ModalCloseButton>
             </ModalHeader>
-            <SelectP setSelectedCat={setSelectedCat}></SelectP>
+            <SelectP setSelectedCat={setSelectedCat} setShowErrCat={setShowErrCat}></SelectP>
+            {showErrCat ? <Text style={{fontSize:10, marginTop:7, marginLeft:7}} >Ingresa una categoria</Text> : ''}
             <ModalHeader>
               <Heading size="md">Ingresa el link</Heading>
             </ModalHeader>
@@ -68,8 +84,9 @@ const ModalLinks = ({showModal, setShowModal}: Props): JSX.Element => {
               <InputField
                 type={'text'}
                 placeholder="http://google.com"
-                onChangeText={value => setLinkUrl(value)}></InputField>
+                onChangeText={value => {setLinkUrl(value), setShowErrLink(false), setErrLink('$coolGray300')}}></InputField>
             </Input>
+            {showErrLink ? <Text style={{fontSize:10, marginTop:7, marginLeft:7}} >Ingresa un link</Text> : ''}
           </ModalBody>
           <ModalFooter>
             <Button
@@ -79,7 +96,12 @@ const ModalLinks = ({showModal, setShowModal}: Props): JSX.Element => {
               mr="$3"
               onPress={() => {
                 setShowModal(false);
+                setShowModal(false);
+                setShowErrCat(false);
+                setShowErrLink(false);
                 setErrLink('$coolGray300');
+                setSelectedCat('');
+                setLinkUrl('');
               }}>
               <ButtonText>Cancel</ButtonText>
             </Button>

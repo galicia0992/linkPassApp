@@ -14,10 +14,13 @@ import {
   Button,
   ButtonText,
   ButtonSpinner,
+  InputSlot,
+  InputIcon,
 } from '@gluestack-ui/themed';
 import Wave from 'react-native-waves';
 import {FIREBASE_AUTH} from '../firebaseConfig';
 import {signInWithEmailAndPassword} from 'firebase/auth';
+import {EyeIcon, EyeOffIcon} from 'lucide-react-native';
 const styles = StyleSheet.create({
   frame: {
     flex: 1,
@@ -40,11 +43,15 @@ const Pass = ({
   setShowAlert,
   setAlertMessage,
 }: Props): JSX.Element => {
-  const [pass, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [pass, setPassword] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const auth = FIREBASE_AUTH;
 
+  const showPasswordState = () => {
+    showPassword ? setShowPassword(false):setShowPassword(true);
+  };
   const logIn = async () => {
     setLoading(true);
     try {
@@ -91,13 +98,19 @@ const Pass = ({
           isInvalid={false}
           isReadOnly={false}>
           <InputField
-            type={'password'}
+            type={showPassword ? 'text' : 'password'}
             placeholder="Ingresa password"
             onChangeText={val => setPassword(val)}
             value={pass}
             keyboardType="default"
             style={styles.font}
           />
+          <InputSlot pr="$3" onPress={showPasswordState}>
+            <InputIcon
+              as={showPassword ? EyeIcon : EyeOffIcon}
+              color="$darkBlue500"
+            />
+          </InputSlot>
         </Input>
         {loading ? (
           <Button

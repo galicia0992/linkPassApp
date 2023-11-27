@@ -4,14 +4,15 @@ import { useState } from 'react'
 import { ChevronDownIcon, Icon, Select, SelectBackdrop, SelectContent, SelectDragIndicator, SelectDragIndicatorWrapper, SelectIcon, SelectInput, SelectItem, SelectPortal, SelectTrigger } from '@gluestack-ui/themed'
 
 interface Props {
-  setSelectedCat:any
+  setSelectedCat:any,
+  setShowErrCat: any
 }
 
-const SelectP = ({setSelectedCat}: Props):JSX.Element => {
+const SelectP = ({setSelectedCat, setShowErrCat}: Props):JSX.Element => {
   
   return (
     
-    <Select onValueChange={(value) => setSelectedCat(value)}>
+    <Select onValueChange={(value) => {setSelectedCat(value), setShowErrCat(false)}}>
     <SelectTrigger variant="outline" size="md" >
       <SelectInput placeholder="Github" />
       <SelectIcon mr="$3">

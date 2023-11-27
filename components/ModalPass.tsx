@@ -1,4 +1,5 @@
 import React, {useState, useRef} from 'react';
+import {Text} from 'react-native';
 import {
   Modal,
   Center,
@@ -11,7 +12,6 @@ import {
   ModalContent,
   ModalHeader,
   Heading,
-  ClockIcon,
   Icon,
   CloseIcon,
   InputField,
@@ -27,21 +27,38 @@ interface Props {
 const ModalPass = ({showModal, setShowModal}: Props): JSX.Element => {
   const [selectedCat, setSelectedCat] = useState<String>('');
   const [password, setPassword] = useState<string>('');
-  const [user, setUser] = useState<string>("")
-  const [errLink, setErrLink] = useState<string>('');
+  const [user, setUser] = useState<string>('');
+  const [errPass, setErrPass] = useState<string>('$coolGray300');
+  const [errUser, setErrUser] = useState<string>('$coolGray300');
+  const [showErrCat, setShowErrCat] = useState<boolean>(false);
+  const [showErrUser, setShowErrUser] = useState<boolean>(false);
+  const [showErrPass, setShowErrPass] = useState<boolean>(false);
 
   const ref = React.useRef(null);
   const catchPost = () => {
-    setSelectedCat('');
-    setPassword('');
-    setUser("")
-    if (selectedCat == '' || password == '') {
-      setErrLink('$error300');
-      console.log('te falta algo');
+    if (selectedCat.length == 0) {
+      setShowErrCat(true);
     } else {
+      setShowErrCat(false);
+    }
+    if (user.length == 0) {
+      setErrUser('$error300');
+      setShowErrUser(true)
+    } else {
+      setErrUser('$coolGray300');
+    }
+    if (password.length == 0) {
+      setErrPass('$error300');
+      setShowErrPass(true)
+    } else {
+      setErrPass('$coolGray300');
+    }
+    if (selectedCat !== '' && user !== '' && password !== '') {
       postPass(password, selectedCat, user);
       setShowModal(false);
-      setErrLink('$coolGray300');
+      setSelectedCat('');
+      setPassword('');
+      setUser('');
     }
   };
   return (
@@ -50,6 +67,13 @@ const ModalPass = ({showModal, setShowModal}: Props): JSX.Element => {
         isOpen={showModal}
         onClose={() => {
           setShowModal(false);
+          setErrPass('$coolGray300');
+          setErrUser('$coolGray300');
+          setShowErrCat(false);
+          setSelectedCat('');
+          setPassword('');
+          setUser('');
+          setShowErrUser(false)
         }}
         finalFocusRef={ref}>
         <ModalBackdrop />
@@ -61,25 +85,28 @@ const ModalPass = ({showModal, setShowModal}: Props): JSX.Element => {
                 <Icon as={CloseIcon} />
               </ModalCloseButton>
             </ModalHeader>
-            <SelectPPass setSelectedCat={setSelectedCat}></SelectPPass>
+            <SelectPPass setSelectedCat={setSelectedCat} setShowErrCat={setShowErrCat}></SelectPPass>
+            {showErrCat ? <Text style={{fontSize:10, marginTop:7, marginLeft:7}} >Ingresa una categoria</Text> : ''}
             <ModalHeader>
               <Heading size="md">Ingresa el usuario</Heading>
             </ModalHeader>
-            <Input borderColor={errLink}>
+            <Input borderColor={errUser}>
               <InputField
                 type={'text'}
-                placeholder="Ingrese password"
-                onChangeText={value => setUser(value)}></InputField>
+                placeholder="Ingrese el usuario"
+                onChangeText={value => {setUser(value); setErrUser('$coolGray300'); setShowErrUser(false);}}></InputField>
             </Input>
+            {showErrUser ? <Text style={{fontSize:10, marginTop:7, marginLeft:7}} >Ingresa un usuario</Text> : ''}
             <ModalHeader>
               <Heading size="md">Ingresa el password</Heading>
             </ModalHeader>
-            <Input borderColor={errLink}>
+            <Input borderColor={errPass}>
               <InputField
                 type={'text'}
                 placeholder="Ingrese password"
-                onChangeText={value => setPassword(value)}></InputField>
+                onChangeText={value => {setPassword(value); setErrPass('$coolGray300'); setShowErrPass(false);}}></InputField>
             </Input>
+            {showErrPass ? <Text style={{fontSize:10, marginTop:7, marginLeft:7}} >Ingresa un password</Text> : ''}
           </ModalBody>
           <ModalFooter>
             <Button
@@ -89,7 +116,13 @@ const ModalPass = ({showModal, setShowModal}: Props): JSX.Element => {
               mr="$3"
               onPress={() => {
                 setShowModal(false);
-                setErrLink('$coolGray300');
+                setErrUser('$coolGray300');
+                setErrPass('$coolGray300');
+                setShowErrCat(false);
+                setSelectedCat('');
+                setPassword('');
+                setUser('');
+                setShowErrUser(false)
               }}>
               <ButtonText>Cancel</ButtonText>
             </Button>
