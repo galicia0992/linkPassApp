@@ -17,10 +17,10 @@ import {
   InputSlot,
   InputIcon,
 } from '@gluestack-ui/themed';
-import Wave from 'react-native-waves';
 import {FIREBASE_AUTH} from '../firebaseConfig';
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import {EyeIcon, EyeOffIcon} from 'lucide-react-native';
+import LogIn from './LogIn';
 const styles = StyleSheet.create({
   frame: {
     flex: 1,
@@ -45,36 +45,16 @@ const Pass = ({
 }: Props): JSX.Element => {
   const [pass, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const auth = FIREBASE_AUTH;
-
   const showPasswordState = () => {
     showPassword ? setShowPassword(false):setShowPassword(true);
   };
-  const logIn = async () => {
-    setLoading(true);
-    try {
-      const response = await signInWithEmailAndPassword(auth, email, pass);
-      navigation.navigate('Choose');
-    } catch (error: any) {
-      setAlertMessage('Error al iniciar sesion ' + error.message);
-      setShowAlert(true);
-      setTimeout(() => {
-        setShowAlert(false);
-      }, 3000);
-    } finally {
-      setLoading(false);
-      setPassword('');
-      setEmail('');
-    }
-  };
+  
 
   return (
     <>
       <View style={styles.frame}>
-        <Wave placement="bottom" speed={20} maxPoints={8} delta={30} />
-        <Wave placement="bottom" gap={20} color="#003d66"></Wave>
+        
         <Input
           variant="underlined"
           size="md"
@@ -112,37 +92,15 @@ const Pass = ({
             />
           </InputSlot>
         </Input>
-        {loading ? (
-          <Button
-            marginVertical={30}
-            isDisabled={true}
-            bg="#633CFF"
-            width={250}
-            size="xl"
-            p="$3">
-            <ButtonSpinner mr="$1" color={'white'} />
-            <ButtonText style={styles.font} color="white">
-              Please wait...
-            </ButtonText>
-          </Button>
-        ) : (
-          <>
-            <Button
-              marginVertical={30}
-              width={250}
-              backgroundColor="#633CFF"
-              size="xl"
-              variant="outline"
-              action="primary"
-              isDisabled={false}
-              isFocusVisible={false}
-              onPress={() => logIn()}>
-              <ButtonText style={styles.font} color="white">
-                Log In
-              </ButtonText>
-            </Button>
-          </>
-        )}
+        <LogIn
+        navigation={navigation}
+        setShowAlert={setShowAlert}
+        setAlertMessage={setAlertMessage}
+        pass={pass}
+        setPassword={setPassword}
+        email={email}
+        setEmail={setEmail}
+        ></LogIn>
       </View>
     </>
   );
