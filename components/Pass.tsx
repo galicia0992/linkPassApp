@@ -1,26 +1,10 @@
 import React from 'react';
 import {useState} from 'react';
-import {
-  Text,
-  View,
-  SafeAreaView,
-  StyleSheet,
-  Alert,
-  ActivityIndicator,
-} from 'react-native';
-import {
-  Input,
-  InputField,
-  Button,
-  ButtonText,
-  ButtonSpinner,
-  InputSlot,
-  InputIcon,
-} from '@gluestack-ui/themed';
-import {FIREBASE_AUTH} from '../firebaseConfig';
-import {signInWithEmailAndPassword} from 'firebase/auth';
+import {View, StyleSheet} from 'react-native';
+import {Input, InputField, InputSlot, InputIcon} from '@gluestack-ui/themed';
 import {EyeIcon, EyeOffIcon} from 'lucide-react-native';
 import LogIn from './LogIn';
+import SignUp from './SignUp';
 const styles = StyleSheet.create({
   frame: {
     flex: 1,
@@ -38,23 +22,17 @@ interface Props {
   setShowAlert: any;
   setAlertMessage: any;
 }
-const Pass = ({
-  navigation,
-  setShowAlert,
-  setAlertMessage,
-}: Props): JSX.Element => {
+const Pass = ({navigation,setShowAlert,setAlertMessage}: Props): JSX.Element => {
   const [pass, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const showPasswordState = () => {
-    showPassword ? setShowPassword(false):setShowPassword(true);
+    showPassword ? setShowPassword(false) : setShowPassword(true);
   };
-  
 
   return (
     <>
       <View style={styles.frame}>
-        
         <Input
           variant="underlined"
           size="md"
@@ -93,14 +71,14 @@ const Pass = ({
           </InputSlot>
         </Input>
         <LogIn
-        navigation={navigation}
-        setShowAlert={setShowAlert}
-        setAlertMessage={setAlertMessage}
-        pass={pass}
-        setPassword={setPassword}
-        email={email}
-        setEmail={setEmail}
-        ></LogIn>
+          navigation={navigation}
+          setShowAlert={setShowAlert}
+          setAlertMessage={setAlertMessage}
+          pass={pass}
+          setPassword={setPassword}
+          email={email}
+          setEmail={setEmail}></LogIn>
+          <SignUp></SignUp>
       </View>
     </>
   );

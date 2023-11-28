@@ -4,10 +4,10 @@ import {GluestackUIProvider} from '@gluestack-ui/themed';
 import {config} from '@gluestack-ui/config';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
-import LogIn from './views/LogIn';
+import LogInV from './views/LogInV';
 import Links from './views/Links';
 import Navbar from './components/Navbar';
-import Titulo from './components/Titulo';
+import SignUp from "./views/SignUpV"
 import PassW from './views/PassW';
 import Choose from './views/Choose';
 
@@ -19,7 +19,7 @@ function App(): JSX.Element {
         <Stack.Navigator initialRouteName="LogIn">
           <Stack.Screen
             name="Log in"
-            component={LogIn}
+            component={LogInV}
             options={{
               headerTitle: "",
               headerStyle: {shadowColor: 'transparent'},
@@ -39,6 +39,10 @@ function App(): JSX.Element {
             name="Choose"
             component={Choose}
             options={{headerTitle: () => <Navbar />}}
+          />
+          <Stack.Screen
+          name="Sign up"
+          component={SignUp}
           />
         </Stack.Navigator>
       </NavigationContainer>

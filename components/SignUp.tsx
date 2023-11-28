@@ -4,6 +4,7 @@ import {Button, ButtonText, ButtonSpinner} from '@gluestack-ui/themed';
 import { useState } from 'react';
 import {FIREBASE_AUTH} from '../firebaseConfig';
 import {signInWithEmailAndPassword} from 'firebase/auth';
+import {useNavigation} from '@react-navigation/native';
 
 const styles = StyleSheet.create({
     frame: {
@@ -17,40 +18,20 @@ const styles = StyleSheet.create({
       fontFamily: 'InstrumentSans-Regular',
     },
   });
-  interface Props {
+  type Props = {
+    navigate: any;
     navigation: any;
-    setShowAlert: any;
-    setAlertMessage: any;
-    pass:any,
-    setPassword:any,
-    email:any,
-    setEmail:any
   }
-const LogIn = ({navigation, setShowAlert, setAlertMessage, pass, setPassword, email, setEmail}: Props): JSX.Element => {
+const SignUp = (): JSX.Element => {
+  const navigation = useNavigation<Props>();
     const [loading, setLoading] = useState<boolean>(false);
-    const auth = FIREBASE_AUTH;
-    const logIn = async () => {
-        setLoading(true);
-        try {
-          const response = await signInWithEmailAndPassword(auth, email, pass);
-          navigation.navigate('Choose');
-        } catch (error: any) {
-          setAlertMessage('Error al iniciar sesion ' + error.message);
-          setShowAlert(true);
-          setTimeout(() => {
-            setShowAlert(false);
-          }, 3000);
-        } finally {
-          setLoading(false);
-          setPassword('');
-          setEmail('');
-        }
+    const signUp = (): void => {
+          navigation.navigate('Sign up');
       };
   return (
     <>
       {loading ? (
         <Button
-          marginVertical={30}
           isDisabled={true}
           bg="#633CFF"
           width={250}
@@ -64,16 +45,16 @@ const LogIn = ({navigation, setShowAlert, setAlertMessage, pass, setPassword, em
       ) : (
         <>
           <Button
-            marginVertical={30}
             width={250}
+            backgroundColor="#633CFF"
             size="xl"
             variant="outline"
             action="primary"
             isDisabled={false}
             isFocusVisible={false}
-            onPress={() => logIn()}>
-            <ButtonText style={styles.font} color="$primary300">
-              Log In
+            onPress={() => signUp()}>
+            <ButtonText style={styles.font} color="white">
+              Sign Up
             </ButtonText>
           </Button>
         </>
@@ -82,4 +63,4 @@ const LogIn = ({navigation, setShowAlert, setAlertMessage, pass, setPassword, em
   );
 };
 
-export default LogIn;
+export default SignUp;

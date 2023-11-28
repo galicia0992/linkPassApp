@@ -67,7 +67,6 @@ const PassW = (): JSX.Element => {
   
   useEffect(() => {
     getPass(setListaPass)
-    console.log(listaPass)
   }, [])
   
 

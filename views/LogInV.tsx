@@ -3,7 +3,7 @@ import Pass from '../components/Pass';
 import {useNavigation} from '@react-navigation/native';
 import Alerta from '../components/Alerta';
 
-const LogIn = (): JSX.Element => {
+const LogInV = (): JSX.Element => {
   const navigation = useNavigation();
   const [showAlert, setShowAlert] = useState(false)
   const [alertMessage, setAlertMessage] = useState("")
@@ -18,10 +18,9 @@ const LogIn = (): JSX.Element => {
         navigation={navigation}
         setShowAlert={setShowAlert}
         setAlertMessage={setAlertMessage}
-        >
-        </Pass>
+        ></Pass>
     </>
   );
 };
 
-export default LogIn;
+export default LogInV;
