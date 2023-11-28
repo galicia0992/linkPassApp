@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 32,
-    backgroundColor: 'white',
+    backgroundColor:"white"
   },
   font: {
     fontFamily: 'InstrumentSans-Regular',
@@ -31,7 +31,7 @@ const Pass = ({navigation,setShowAlert,setAlertMessage}: Props): JSX.Element => 
   };
 
   return (
-    <>
+    
       <View style={styles.frame}>
         <Input
           variant="underlined"
@@ -80,7 +80,7 @@ const Pass = ({navigation,setShowAlert,setAlertMessage}: Props): JSX.Element => 
           setEmail={setEmail}></LogIn>
           <SignUp></SignUp>
       </View>
-    </>
+    
   );
 };
 

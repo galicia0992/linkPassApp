@@ -1,5 +1,6 @@
 import { getDatabase, ref, push } from "firebase/database"
-import { UtensilsIcon } from "lucide-react-native";
+
+
 const postNewUser = (email, link, categoria) =>{
     const db = getDatabase()
     push(ref(db, `${email}/` + 0),{
