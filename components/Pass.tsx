@@ -78,7 +78,9 @@ const Pass = ({navigation,setShowAlert,setAlertMessage}: Props): JSX.Element => 
           setPassword={setPassword}
           email={email}
           setEmail={setEmail}></LogIn>
-          <SignUp></SignUp>
+          <SignUp
+          
+          ></SignUp>
       </View>
     
   );

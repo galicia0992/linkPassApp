@@ -46,10 +46,8 @@ const LinksComponent = () => {
   const [idListas, setIdListas] = useState<any[]>([])
   const [keyList, setKeyList] = useState<number>(0)
   useEffect(() => {
-    
     getLinks(setListaLinks);
     getLinksToRemove(setIdListas)
-    console.log(listaLinks)
   }, []);
   
   

@@ -33,7 +33,7 @@ const LogIn = ({navigation, setShowAlert, setAlertMessage, pass, setPassword, em
         setLoading(true);
         try {
           const response = await signInWithEmailAndPassword(auth, email, pass);
-          navigation.navigate('Choose');
+          navigation.navigate('Links', {email});
         } catch (error: any) {
           setAlertMessage('Error al iniciar sesion ' + error.message);
           setShowAlert(true);

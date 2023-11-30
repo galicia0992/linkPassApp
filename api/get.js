@@ -1,15 +1,15 @@
-import { getDatabase, ref, onValue } from "firebase/database";
+import {getDatabase, ref, onValue} from 'firebase/database';
 
-
-const getLinks = async(setListaLinks) =>{
-  const dbRef = ref(getDatabase());
-  
-  onValue(dbRef, (snapshot) =>{
-    const data = snapshot.val()
-    Object.values(data).map(item =>{
-      setListaLinks(Object.values(item[0]))
-      
-    })
-  })
-}
-export default getLinks
+const getLinks = async (setListaLinks) => {
+  const db = getDatabase();
+  const starCountRef = ref(db, 'dbLinks/0');
+  onValue(starCountRef, snapshot => {
+    const data = snapshot.val();
+    let arr = [];
+    Object.values(data).map(item => {
+      arr.push(item);
+    });
+    setListaLinks(arr);
+  });
+};
+export default getLinks;

@@ -60,16 +60,16 @@ const styles = StyleSheet.create({
   },
 });
 
-const Links = (): JSX.Element => {
+const Links = ({route}:any): JSX.Element => {
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [showLinkC, setShowLinkC] = useState<boolean>(false);
   const [listaLinks, setListaLinks] = useState<any[]>([]);
+  const {email} = route.params
+  const e = []
+  e.push(email)
   
+  console.log(e)
   useEffect(() => {
     getLinks(setListaLinks)
-    
-    
-    
   }, [])
   
 
