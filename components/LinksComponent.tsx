@@ -1,7 +1,7 @@
 import {View, Text, StyleSheet, Pressable} from 'react-native';
 import React from 'react';
 import {useState, useEffect} from 'react';
-import getLinks from '../api/get.js';
+import getLinks from '../api/get';
 import getLinksToRemove from '../api/getToRemove.js';
 import {Input, InputField} from '@gluestack-ui/themed';
 import ModalLinksDelete from './ModalLinksDelete';
@@ -39,17 +39,22 @@ const styles = StyleSheet.create({
     marginBottom:20
   }
 });
-
-const LinksComponent = () => {
+interface Props{
+  route: any
+}
+const LinksComponent = ({route}: Props) => {
   const [listaLinks, setListaLinks] = useState<any[]>([]);
   const [showModalDelete, setShowModalDelete] = useState<Boolean>(false)
   const [idListas, setIdListas] = useState<any[]>([])
   const [keyList, setKeyList] = useState<number>(0)
+
   useEffect(() => {
-    getLinks(setListaLinks);
+    const {email} = route.params
+    getLinks(setListaLinks, email.replace(/\./g, '1'));
     getLinksToRemove(setIdListas)
-  }, []);
   
+  }, []);
+
   
   return (
     <View

@@ -5,7 +5,7 @@ import LinkCardGen from '../components/LinkCardGen';
 import ModalLinks from '../components/ModalLinks';
 import {ScrollView, Box} from '@gluestack-ui/themed';
 import LinksComponent from '../components/LinksComponent';
-import getLinks from '../api/get.js';
+import getLinks from '../api/get';
 
 const styles = StyleSheet.create({
   container: {
@@ -63,15 +63,12 @@ const styles = StyleSheet.create({
 const Links = ({route}:any): JSX.Element => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [listaLinks, setListaLinks] = useState<any[]>([]);
-  const {email} = route.params
-  const e = []
-  e.push(email)
   
-  console.log(e)
+  
   useEffect(() => {
-    getLinks(setListaLinks)
+    const {email} = route.params
+    getLinks(setListaLinks, email.replace(/\./g, '1'))
   }, [])
-  
 
   return (
     <View style={styles.container}>
@@ -97,13 +94,17 @@ const Links = ({route}:any): JSX.Element => {
           </Box>
         ) : (
           <ScrollView style={{width:"90%"}}>
-            <LinksComponent></LinksComponent>
+            <LinksComponent
+            route={route}
+            ></LinksComponent>
           </ScrollView>
         )}
       </View>
       <ModalLinks
         setShowModal={setShowModal}
-        showModal={showModal}></ModalLinks>
+        showModal={showModal}
+        route={route}
+        ></ModalLinks>
     </View>
   );
 };

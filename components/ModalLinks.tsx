@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useState, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Modal,
   Center,
@@ -23,15 +23,23 @@ import post from '../api/post';
 interface Props {
   showModal: any;
   setShowModal: any;
+  route:any
 }
 
-const ModalLinks = ({showModal, setShowModal}: Props): JSX.Element => {
+const ModalLinks = ({showModal, setShowModal, route}: Props): JSX.Element => {
   const [selectedCat, setSelectedCat] = useState<String>('');
   const [linkUrl, setLinkUrl] = useState<string>('');
   const [errLink, setErrLink] = useState<string>('$coolGray300');
   const [showErrCat, setShowErrCat] = useState<boolean>(false);
   const [showErrLink, setShowErrLink] = useState<boolean>(false);
-
+  const [emailPost, setEmailPost] = useState<any[]>([])
+  
+  useEffect(() => {
+    const {email} = route.params
+    setEmailPost(email)
+  }, [])
+  
+  
   const ref = React.useRef(null);
   const catchPost = () => {
     if (selectedCat.length == 0) {
@@ -47,7 +55,7 @@ const ModalLinks = ({showModal, setShowModal}: Props): JSX.Element => {
     }
 
     if (selectedCat !== '' && linkUrl !== '') {
-      post(linkUrl, selectedCat);
+      post(linkUrl, selectedCat, emailPost);
       setShowModal(false);
       setSelectedCat('');
       setLinkUrl('');
