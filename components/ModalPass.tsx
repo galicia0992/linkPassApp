@@ -19,6 +19,9 @@ import {
 } from '@gluestack-ui/themed';
 import SelectPPass from './SelectPPass';
 import postPass from '../api/postPass';
+import { emailPassContext } from '../App';
+import {useContext} from 'react';
+
 interface Props {
   showModal: any;
   setShowModal: any;
@@ -33,6 +36,8 @@ const ModalPass = ({showModal, setShowModal}: Props): JSX.Element => {
   const [showErrCat, setShowErrCat] = useState<boolean>(false);
   const [showErrUser, setShowErrUser] = useState<boolean>(false);
   const [showErrPass, setShowErrPass] = useState<boolean>(false);
+
+  const emailPass = useContext(emailPassContext)
 
   const ref = React.useRef(null);
   const catchPost = () => {
@@ -54,7 +59,7 @@ const ModalPass = ({showModal, setShowModal}: Props): JSX.Element => {
       setErrPass('$coolGray300');
     }
     if (selectedCat !== '' && user !== '' && password !== '') {
-      postPass(password, selectedCat, user);
+      postPass(password, selectedCat, user, emailPass.replace(/\./g, '1'));
       setShowModal(false);
       setSelectedCat('');
       setPassword('');

@@ -6,6 +6,8 @@ import {Input, InputField, InputSlot, InputIcon} from '@gluestack-ui/themed';
 import ModalPassDelete from './ModalPassDelete';
 import getPass from '../api/getPass.js';
 import {EyeIcon, EyeOffIcon} from 'lucide-react-native';
+import { emailPassContext } from '../App';
+import {useContext} from 'react';
 
 const styles = StyleSheet.create({
   card: {
@@ -47,11 +49,13 @@ const PasswordsComponent = () => {
   const [idListas, setIdListas] = useState<any[]>([]);
   const [keyList, setKeyList] = useState<number>(0);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const emailPass = useContext(emailPassContext)
+
   const showPasswordState = () => {
     showPassword ? setShowPassword(false):setShowPassword(true);
   };
   useEffect(() => {
-    getPass(setListaPass);
+    getPass(setListaPass, emailPass.replace(/\./g, '1'));
     getLinksToRemove(setIdListas);
   }, []);
 

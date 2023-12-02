@@ -1,13 +1,13 @@
 import {StyleSheet, Text, View, Pressable} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useNavigation } from '@react-navigation/native';
-
 
 const Navbar = (): JSX.Element => {
   const navigation: any = useNavigation();
-
   const [butttonColorLink, setButtonColorLink] = useState('');
   const [butttonColorPass, setButtonColorPass] = useState('');
+
+  
   const buttonLinks = (): void => {
     setButtonColorLink('#633cff43');
     navigation.navigate('Links');
@@ -16,6 +16,8 @@ const Navbar = (): JSX.Element => {
     setButtonColorPass('#633cff43');
     navigation.navigate('Passwords');
   };
+  
+  
   return (
     <View style={styles.navbarContainer}>
       <Pressable

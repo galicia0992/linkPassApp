@@ -1,51 +1,67 @@
 import * as React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {Button, ButtonText, ButtonSpinner} from '@gluestack-ui/themed';
-import { useState } from 'react';
+import {useState} from 'react';
 import {FIREBASE_AUTH} from '../firebaseConfig';
 import {signInWithEmailAndPassword} from 'firebase/auth';
-
+import {userContext} from '../App';
+import { emailPassContext } from '../App';
+import {useContext} from 'react';
 const styles = StyleSheet.create({
-    frame: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 32,
-      backgroundColor: 'white',
-    },
-    font: {
-      fontFamily: 'InstrumentSans-Regular',
-    },
-  });
-  interface Props {
-    navigation: any;
-    setShowAlert: any;
-    setAlertMessage: any;
-    pass:any,
-    setPassword:any,
-    email:any,
-    setEmail:any
-  }
-const LogIn = ({navigation, setShowAlert, setAlertMessage, pass, setPassword, email, setEmail}: Props): JSX.Element => {
-    const [loading, setLoading] = useState<boolean>(false);
-    const auth = FIREBASE_AUTH;
-    const logIn = async () => {
-        setLoading(true);
-        try {
-          const response = await signInWithEmailAndPassword(auth, email, pass);
-          navigation.navigate('Links', {email});
-        } catch (error: any) {
-          setAlertMessage('Error al iniciar sesion ' + error.message);
-          setShowAlert(true);
-          setTimeout(() => {
-            setShowAlert(false);
-          }, 3000);
-        } finally {
-          setLoading(false);
-          setPassword('');
-          setEmail('');
-        }
-      };
+  frame: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 32,
+    backgroundColor: 'white',
+  },
+  font: {
+    fontFamily: 'InstrumentSans-Regular',
+  },
+});
+interface Props {
+  navigation: any;
+  setShowAlert: any;
+  setAlertMessage: any;
+  pass: any;
+  setPassword: any;
+  email: any;
+  setEmail: any;
+  setEmailPass: string;
+}
+const LogIn = ({
+  navigation,
+  setShowAlert,
+  setAlertMessage,
+  pass,
+  setPassword,
+  email,
+  setEmail,
+}: Props): JSX.Element => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const setEmailPass = useContext(userContext);
+  const emailPass = useContext(emailPassContext)
+  
+  const auth = FIREBASE_AUTH;
+
+  const logIn = async () => {
+    setLoading(true);
+    try {
+      const response = await signInWithEmailAndPassword(auth, email, pass);
+      setEmailPass(email);
+      navigation.navigate('Links', {email});
+    } catch (error: any) {
+      setAlertMessage('Error al iniciar sesion ' + error.message);
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+    } finally {
+      setLoading(false);
+      setPassword('');
+      setEmail('');
+    }
+  };
   return (
     <>
       {loading ? (

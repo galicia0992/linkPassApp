@@ -5,8 +5,9 @@ import PassCardGen from '../components/PassCardGen';
 import ModalPass from '../components/ModalPass';
 import {ScrollView, Box} from '@gluestack-ui/themed';
 import PasswordsComponent from '../components/PasswordsComponent';
-
 import getPass from '../api/getPass';
+import { emailPassContext } from '../App';
+import {useContext} from 'react';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,8 +20,8 @@ const styles = StyleSheet.create({
     height: '98%',
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
-    paddingTop:10,
-    paddingHorizontal:10
+    paddingTop: 10,
+    paddingHorizontal: 10,
   },
   textHeader: {
     fontFamily: 'InstrumentSans-Regular',
@@ -64,11 +65,12 @@ const styles = StyleSheet.create({
 const PassW = (): JSX.Element => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [listaPass, setListaPass] = useState<any[]>([]);
-  
+  const emailPass = useContext(emailPassContext)
+
   useEffect(() => {
-    getPass(setListaPass)
-  }, [])
-  
+    getPass(setListaPass, emailPass.replace(/\./g, '1'));
+  }, []);
+
 
   return (
     <View style={styles.container}>
@@ -76,8 +78,8 @@ const PassW = (): JSX.Element => {
         <View>
           <Text style={styles.textHeader}>Almacen de passwords</Text>
           <Text style={styles.textDescription}>
-            Guarda/elimina tus passwords en la seccion inferior. los passwords que
-            elimines no las podras recuperar
+            Guarda/elimina tus passwords en la seccion inferior. los passwords
+            que elimines no las podras recuperar
           </Text>
         </View>
         <PassCardGen setShowModal={setShowModal}></PassCardGen>
@@ -93,14 +95,12 @@ const PassW = (): JSX.Element => {
             </Text>
           </Box>
         ) : (
-          <ScrollView style={{width:"90%"}}>
+          <ScrollView style={{width: '90%'}}>
             <PasswordsComponent></PasswordsComponent>
           </ScrollView>
         )}
       </View>
-      <ModalPass
-        setShowModal={setShowModal}
-        showModal={showModal}></ModalPass>
+      <ModalPass setShowModal={setShowModal} showModal={showModal}></ModalPass>
     </View>
   );
 };

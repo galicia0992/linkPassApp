@@ -44,11 +44,10 @@ const Alerta = ({showAlert, alertMessage}: Props): JSX.Element => {
   
 
   return (
-    <View style={{backgroundColor: 'white'}}>
+    <View style={{backgroundColor: 'white', position:"absolute", zIndex:1, width:"100%"}}>
       <Animated.View
         style={[
           {
-            // Bind opacity to animated value
             opacity: fadeAnim,
           },
         ]}>

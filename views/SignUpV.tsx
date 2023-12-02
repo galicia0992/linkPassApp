@@ -1,7 +1,7 @@
 import {View, Text, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 import {Input, InputField, Button} from '@gluestack-ui/themed';
-import LinearGradient from 'react-native-linear-gradient';
+import Alerta from '../components/Alerta';
 import createUser from '../api/createUser';
 
 const styles = StyleSheet.create({
@@ -41,6 +41,8 @@ const Choose = ({navigation}:Props): JSX.Element => {
   const [pass, setPass] = useState<string>('');
 
   return (
+    <>
+    <Alerta></Alerta>
     <View style={styles.cardSignInContainer}>
       <View style={styles.cardSignIn}>
         <Input
@@ -71,6 +73,7 @@ const Choose = ({navigation}:Props): JSX.Element => {
         </Button>
       </View>
     </View>
+    </>
   );
 };
 

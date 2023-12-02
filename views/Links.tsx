@@ -7,6 +7,7 @@ import {ScrollView, Box} from '@gluestack-ui/themed';
 import LinksComponent from '../components/LinksComponent';
 import getLinks from '../api/get';
 
+
 const styles = StyleSheet.create({
   container: {
     padding: 16,
@@ -64,10 +65,10 @@ const Links = ({route}:any): JSX.Element => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [listaLinks, setListaLinks] = useState<any[]>([]);
   
-  
   useEffect(() => {
     const {email} = route.params
     getLinks(setListaLinks, email.replace(/\./g, '1'))
+    
   }, [])
 
   return (
