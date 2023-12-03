@@ -19,6 +19,8 @@ import {
   Input,
 } from '@gluestack-ui/themed';
 import remover from '../api/remove';
+import { emailPassContext } from '../App';
+import {useContext} from 'react';
 
 interface Props {
   showModalDelete: any;
@@ -28,10 +30,11 @@ interface Props {
 }
 
 const ModalLinksDelete = ({showModalDelete, setShowModalDelete, idListas, keyList}: Props): JSX.Element => {
-
+  const emailPass = useContext(emailPassContext)
   const ref = React.useRef(null);
   const arr: string[] = []
-  Object.keys(idListas[0]).map((item)=>{
+
+  Object.keys(idListas).map((item)=>{
     arr.push(item)
   })
   
@@ -73,7 +76,7 @@ const ModalLinksDelete = ({showModalDelete, setShowModalDelete, idListas, keyLis
               borderWidth="$0"
               onPress={() => {
                 setShowModalDelete(false),
-                remover(arr[keyList])
+                remover(arr[keyList], emailPass.replace(/\./g, '1'))
               }}>
               <ButtonText>Eliminar</ButtonText>
             </Button>

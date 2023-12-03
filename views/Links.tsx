@@ -68,7 +68,6 @@ const Links = ({route}:any): JSX.Element => {
   useEffect(() => {
     const {email} = route.params
     getLinks(setListaLinks, email.replace(/\./g, '1'))
-    
   }, [])
 
   return (

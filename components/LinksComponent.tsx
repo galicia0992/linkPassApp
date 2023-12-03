@@ -51,8 +51,7 @@ const LinksComponent = ({route}: Props) => {
   useEffect(() => {
     const {email} = route.params
     getLinks(setListaLinks, email.replace(/\./g, '1'));
-    getLinksToRemove(setIdListas)
-  
+    getLinksToRemove(setIdListas, email.replace(/\./g, '1'), 0)
   }, []);
 
   

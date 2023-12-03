@@ -56,7 +56,7 @@ const PasswordsComponent = () => {
   };
   useEffect(() => {
     getPass(setListaPass, emailPass.replace(/\./g, '1'));
-    getLinksToRemove(setIdListas);
+    getLinksToRemove(setIdListas, emailPass.replace(/\./g, '1'), 1);
   }, []);
 
   return (
