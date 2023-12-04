@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useState, useRef} from 'react';
+import { useEmailContext } from '../context/context';
 import {
   Modal,
   Center,
@@ -30,7 +31,7 @@ interface Props {
 }
 
 const ModalLinksDelete = ({showModalDelete, setShowModalDelete, idListas, keyList}: Props): JSX.Element => {
-  const emailPass = useContext(emailPassContext)
+  const emailPass = useEmailContext()
   const ref = React.useRef(null);
   const arr: string[] = []
 

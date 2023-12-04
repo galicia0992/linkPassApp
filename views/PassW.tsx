@@ -6,8 +6,7 @@ import ModalPass from '../components/ModalPass';
 import {ScrollView, Box} from '@gluestack-ui/themed';
 import PasswordsComponent from '../components/PasswordsComponent';
 import getPass from '../api/getPass';
-import { emailPassContext } from '../App';
-import {useContext} from 'react';
+import { useEmailContext } from '../context/context';
 
 const styles = StyleSheet.create({
   container: {
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
 const PassW = (): JSX.Element => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [listaPass, setListaPass] = useState<any[]>([]);
-  const emailPass = useContext(emailPassContext)
+  const emailPass = useEmailContext()
 
   useEffect(() => {
     getPass(setListaPass, emailPass.replace(/\./g, '1'));

@@ -8,6 +8,7 @@ import getPass from '../api/getPass.js';
 import {EyeIcon, EyeOffIcon} from 'lucide-react-native';
 import { emailPassContext } from '../App';
 import {useContext} from 'react';
+import { useEmailContext } from '../context/context.jsx';
 
 const styles = StyleSheet.create({
   card: {
@@ -49,7 +50,7 @@ const PasswordsComponent = () => {
   const [idListas, setIdListas] = useState<any[]>([]);
   const [keyList, setKeyList] = useState<number>(0);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const emailPass = useContext(emailPassContext)
+  const emailPass = useEmailContext()
 
   const showPasswordState = () => {
     showPassword ? setShowPassword(false):setShowPassword(true);

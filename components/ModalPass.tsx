@@ -21,6 +21,7 @@ import SelectPPass from './SelectPPass';
 import postPass from '../api/postPass';
 import { emailPassContext } from '../App';
 import {useContext} from 'react';
+import { useEmailContext } from '../context/context';
 
 interface Props {
   showModal: any;
@@ -37,7 +38,7 @@ const ModalPass = ({showModal, setShowModal}: Props): JSX.Element => {
   const [showErrUser, setShowErrUser] = useState<boolean>(false);
   const [showErrPass, setShowErrPass] = useState<boolean>(false);
 
-  const emailPass = useContext(emailPassContext)
+  const emailPass = useEmailContext()
 
   const ref = React.useRef(null);
   const catchPost = () => {

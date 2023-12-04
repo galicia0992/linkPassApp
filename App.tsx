@@ -5,6 +5,7 @@ import {config} from '@gluestack-ui/config';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {useContext} from 'react';
+import { EmailProvider } from './context/context';
 import LogInV from './views/LogInV';
 import Links from './views/Links';
 import Navbar from './components/Navbar';
@@ -16,12 +17,11 @@ const Stack = createStackNavigator();
 export const userContext = createContext('');
 export const emailPassContext = createContext('');
 function App(): JSX.Element {
-  const [emailPass, setEmailPass] = useState<any[]>([]);
-  console.log(emailPass);
+  
+  
   return (
-    <userContext.Provider value={setEmailPass}>
-      <emailPassContext.Provider value={emailPass}>
-        <GluestackUIProvider config={config}>
+        <EmailProvider>
+          <GluestackUIProvider config={config}>
           <NavigationContainer>
             <Stack.Navigator initialRouteName="LogIn">
               <Stack.Screen
@@ -51,8 +51,8 @@ function App(): JSX.Element {
             </Stack.Navigator>
           </NavigationContainer>
         </GluestackUIProvider>
-      </emailPassContext.Provider>
-    </userContext.Provider>
+        </EmailProvider>
+      
   );
 }
 

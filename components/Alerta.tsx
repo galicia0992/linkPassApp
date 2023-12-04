@@ -1,5 +1,4 @@
 import {Alert, AlertIcon, AlertText, InfoIcon} from '@gluestack-ui/themed';
-import linkContext from '../context/context';
 import {useContext} from 'react';
 import React, {useRef, useEffect} from 'react';
 import {

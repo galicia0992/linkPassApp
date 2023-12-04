@@ -7,6 +7,8 @@ import {signInWithEmailAndPassword} from 'firebase/auth';
 import {userContext} from '../App';
 import { emailPassContext } from '../App';
 import {useContext} from 'react';
+import { useSetEmailContext } from '../context/context';
+
 const styles = StyleSheet.create({
   frame: {
     flex: 1,
@@ -27,7 +29,7 @@ interface Props {
   setPassword: any;
   email: any;
   setEmail: any;
-  setEmailPass: string;
+  setEmailPass: any;
 }
 const LogIn = ({
   navigation,
@@ -36,11 +38,10 @@ const LogIn = ({
   pass,
   setPassword,
   email,
-  setEmail,
+  setEmail
 }: Props): JSX.Element => {
   const [loading, setLoading] = useState<boolean>(false);
-  const setEmailPass = useContext(userContext);
-  const emailPass = useContext(emailPassContext)
+  const setEmailPass = useSetEmailContext()
   
   const auth = FIREBASE_AUTH;
 
