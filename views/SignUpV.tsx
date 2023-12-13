@@ -65,8 +65,8 @@ const Choose = ({navigation}:Props): JSX.Element => {
           isReadOnly={false}>
           <InputField
             onChangeText={value => setPass(value)}
-            placeholder="Ingresa un email"
-            keyboardType="email-address"></InputField>
+            placeholder="Contraseña"
+            keyboardType="default"></InputField>
         </Input>
         <Button onPress={() => createUser(email, pass, navigation)}>
           <Text>alta</Text>

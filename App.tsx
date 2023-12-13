@@ -1,10 +1,9 @@
 import 'react-native-gesture-handler';
-import React, {createContext, useState} from 'react';
+import React, {createContext} from 'react';
 import {GluestackUIProvider} from '@gluestack-ui/themed';
 import {config} from '@gluestack-ui/config';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
-import {useContext} from 'react';
 import { EmailProvider } from './context/context';
 import LogInV from './views/LogInV';
 import Links from './views/Links';
@@ -14,8 +13,6 @@ import PassW from './views/PassW';
 import Choose from './views/Choose';
 
 const Stack = createStackNavigator();
-export const userContext = createContext('');
-export const emailPassContext = createContext('');
 function App(): JSX.Element {
   
   

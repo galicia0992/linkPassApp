@@ -6,8 +6,6 @@ import {Input, InputField, InputSlot, InputIcon} from '@gluestack-ui/themed';
 import ModalPassDelete from './ModalPassDelete';
 import getPass from '../api/getPass.js';
 import {EyeIcon, EyeOffIcon} from 'lucide-react-native';
-import { emailPassContext } from '../App';
-import {useContext} from 'react';
 import { useEmailContext } from '../context/context.jsx';
 
 const styles = StyleSheet.create({

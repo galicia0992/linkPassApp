@@ -4,9 +4,6 @@ import {Button, ButtonText, ButtonSpinner} from '@gluestack-ui/themed';
 import {useState} from 'react';
 import {FIREBASE_AUTH} from '../firebaseConfig';
 import {signInWithEmailAndPassword} from 'firebase/auth';
-import {userContext} from '../App';
-import { emailPassContext } from '../App';
-import {useContext} from 'react';
 import { useSetEmailContext } from '../context/context';
 
 const styles = StyleSheet.create({
