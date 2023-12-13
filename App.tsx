@@ -7,10 +7,13 @@ import {NavigationContainer} from '@react-navigation/native';
 import { EmailProvider } from './context/context';
 import LogInV from './views/LogInV';
 import Links from './views/Links';
-import Navbar from './components/Navbar';
+import NavbarLinks from './components/NavbarLinks';
+import NavbarPass from './components/NavbarPass';
 import SignUp from './views/SignUpV';
 import PassW from './views/PassW';
 import Choose from './views/Choose';
+import { ApplicationProvider } from '@ui-kitten/components';
+import * as eva from '@eva-design/eva';
 
 const Stack = createStackNavigator();
 function App(): JSX.Element {
@@ -18,6 +21,7 @@ function App(): JSX.Element {
   
   return (
         <EmailProvider>
+          <ApplicationProvider {...eva} theme={eva.light}>
           <GluestackUIProvider config={config}>
           <NavigationContainer>
             <Stack.Navigator initialRouteName="LogIn">
@@ -32,22 +36,18 @@ function App(): JSX.Element {
               <Stack.Screen
                 name="Links"
                 component={Links}
-                options={{headerTitle: () => <Navbar />}}
+                options={{headerTitle: () => <NavbarLinks />}}
               />
               <Stack.Screen
                 name="Passwords"
                 component={PassW}
-                options={{headerTitle: () => <Navbar />}}
-              />
-              <Stack.Screen
-                name="Choose"
-                component={Choose}
-                options={{headerTitle: () => <Navbar />}}
+                options={{headerTitle: () => <NavbarPass />}}
               />
               <Stack.Screen name="Sign up" component={SignUp} />
             </Stack.Navigator>
           </NavigationContainer>
         </GluestackUIProvider>
+          </ApplicationProvider>
         </EmailProvider>
       
   );

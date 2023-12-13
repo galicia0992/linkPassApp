@@ -117,6 +117,7 @@ const PasswordsComponent = () => {
                 isInvalid={false}
                 isReadOnly={false}>
                 <InputField
+                showSoftInputOnFocus={false}
                   placeholder="Enter Text here"
                   value={`${item.user}`}
                 />
@@ -133,6 +134,7 @@ const PasswordsComponent = () => {
                 isInvalid={false}
                 isReadOnly={false}>
                 <InputField
+                showSoftInputOnFocus={false}
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Enter Text here"
                   value={`${item.pass}`}

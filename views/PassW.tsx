@@ -7,6 +7,9 @@ import {ScrollView, Box} from '@gluestack-ui/themed';
 import PasswordsComponent from '../components/PasswordsComponent';
 import getPass from '../api/getPass';
 import { useEmailContext } from '../context/context';
+import { KeyboardAvoidingView } from 'react-native';
+import { Platform } from 'react-native';
+import Navbar from '../components/NavbarLinks';
 
 const styles = StyleSheet.create({
   container: {
@@ -72,6 +75,7 @@ const PassW = (): JSX.Element => {
 
 
   return (
+    
     <View style={styles.container}>
       <View style={styles.cardContainer}>
         <View>
@@ -99,8 +103,11 @@ const PassW = (): JSX.Element => {
           </ScrollView>
         )}
       </View>
+      
       <ModalPass setShowModal={setShowModal} showModal={showModal}></ModalPass>
+    
     </View>
+    
   );
 };
 

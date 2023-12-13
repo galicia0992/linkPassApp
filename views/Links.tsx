@@ -6,6 +6,7 @@ import ModalLinks from '../components/ModalLinks';
 import {ScrollView, Box} from '@gluestack-ui/themed';
 import LinksComponent from '../components/LinksComponent';
 import getLinks from '../api/get';
+import Navbar from '../components/NavbarLinks';
 
 
 const styles = StyleSheet.create({

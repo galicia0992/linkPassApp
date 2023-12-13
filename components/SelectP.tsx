@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { useState } from 'react'
 import { ChevronDownIcon, Icon, Select, SelectBackdrop, SelectContent, SelectDragIndicator, SelectDragIndicatorWrapper, SelectIcon, SelectInput, SelectItem, SelectPortal, SelectTrigger } from '@gluestack-ui/themed'
-
+import { ScrollView } from '@gluestack-ui/themed'
 interface Props {
   setSelectedCat:any,
   setShowErrCat: any
@@ -25,6 +25,7 @@ const SelectP = ({setSelectedCat, setShowErrCat}: Props):JSX.Element => {
         <SelectDragIndicatorWrapper>
           <SelectDragIndicator />
         </SelectDragIndicatorWrapper>
+        <ScrollView width={"100%"}>
         <SelectItem
           label="Desarrollo"
           value="dev"
@@ -66,6 +67,7 @@ const SelectP = ({setSelectedCat, setShowErrCat}: Props):JSX.Element => {
           label="Otros"
           value="Otros"
         />
+        </ScrollView>
       </SelectContent>
     </SelectPortal>
   </Select>

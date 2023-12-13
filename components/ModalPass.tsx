@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {Text} from 'react-native';
+import {Platform, Text} from 'react-native';
 import {
   Modal,
   Center,
@@ -19,9 +19,9 @@ import {
 } from '@gluestack-ui/themed';
 import SelectPPass from './SelectPPass';
 import postPass from '../api/postPass';
-import { emailPassContext } from '../App';
-import {useContext} from 'react';
-import { useEmailContext } from '../context/context';
+import {useEmailContext} from '../context/context';
+import {KeyboardAvoidingView} from 'react-native';
+import {Key} from 'lucide-react-native';
 
 interface Props {
   showModal: any;
@@ -38,7 +38,7 @@ const ModalPass = ({showModal, setShowModal}: Props): JSX.Element => {
   const [showErrUser, setShowErrUser] = useState<boolean>(false);
   const [showErrPass, setShowErrPass] = useState<boolean>(false);
 
-  const emailPass = useEmailContext()
+  const emailPass = useEmailContext();
 
   const ref = React.useRef(null);
   const catchPost = () => {
@@ -49,13 +49,13 @@ const ModalPass = ({showModal, setShowModal}: Props): JSX.Element => {
     }
     if (user.length == 0) {
       setErrUser('$error300');
-      setShowErrUser(true)
+      setShowErrUser(true);
     } else {
       setErrUser('$coolGray300');
     }
     if (password.length == 0) {
       setErrPass('$error300');
-      setShowErrPass(true)
+      setShowErrPass(true);
     } else {
       setErrPass('$coolGray300');
     }
@@ -79,70 +79,102 @@ const ModalPass = ({showModal, setShowModal}: Props): JSX.Element => {
           setSelectedCat('');
           setPassword('');
           setUser('');
-          setShowErrUser(false)
+          setShowErrUser(false);
         }}
         finalFocusRef={ref}>
         <ModalBackdrop />
-        <ModalContent>
-          <ModalBody>
-            <ModalHeader>
-              <Heading size="md">Selecciona la categoria</Heading>
-              <ModalCloseButton>
-                <Icon as={CloseIcon} />
-              </ModalCloseButton>
-            </ModalHeader>
-            <SelectPPass setSelectedCat={setSelectedCat} setShowErrCat={setShowErrCat}></SelectPPass>
-            {showErrCat ? <Text style={{fontSize:10, marginTop:7, marginLeft:7}} >Ingresa una categoria</Text> : ''}
-            <ModalHeader>
-              <Heading size="md">Ingresa el usuario</Heading>
-            </ModalHeader>
-            <Input borderColor={errUser}>
-              <InputField
-                type={'text'}
-                placeholder="Ingrese el usuario"
-                onChangeText={value => {setUser(value); setErrUser('$coolGray300'); setShowErrUser(false);}}></InputField>
-            </Input>
-            {showErrUser ? <Text style={{fontSize:10, marginTop:7, marginLeft:7}} >Ingresa un usuario</Text> : ''}
-            <ModalHeader>
-              <Heading size="md">Ingresa el password</Heading>
-            </ModalHeader>
-            <Input borderColor={errPass}>
-              <InputField
-                type={'text'}
-                placeholder="Ingrese password"
-                onChangeText={value => {setPassword(value); setErrPass('$coolGray300'); setShowErrPass(false);}}></InputField>
-            </Input>
-            {showErrPass ? <Text style={{fontSize:10, marginTop:7, marginLeft:7}} >Ingresa un password</Text> : ''}
-          </ModalBody>
-          <ModalFooter>
-            <Button
-              variant="outline"
-              size="sm"
-              action="secondary"
-              mr="$3"
-              onPress={() => {
-                setShowModal(false);
-                setErrUser('$coolGray300');
-                setErrPass('$coolGray300');
-                setShowErrCat(false);
-                setSelectedCat('');
-                setPassword('');
-                setUser('');
-                setShowErrUser(false)
-              }}>
-              <ButtonText>Cancel</ButtonText>
-            </Button>
-            <Button
-              size="sm"
-              action="positive"
-              borderWidth="$0"
-              onPress={() => {
-                catchPost();
-              }}>
-              <ButtonText>Guardar</ButtonText>
-            </Button>
-          </ModalFooter>
-        </ModalContent>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          keyboardVerticalOffset={82}>
+          <ModalContent>
+            <ModalBody>
+              <ModalHeader>
+                <Heading size="md">Selecciona la categoria</Heading>
+                <ModalCloseButton>
+                  <Icon as={CloseIcon} />
+                </ModalCloseButton>
+              </ModalHeader>
+              <SelectPPass
+                setSelectedCat={setSelectedCat}
+                setShowErrCat={setShowErrCat}></SelectPPass>
+              {showErrCat ? (
+                <Text style={{fontSize: 10, marginTop: 7, marginLeft: 7}}>
+                  Ingresa una categoria
+                </Text>
+              ) : (
+                ''
+              )}
+              <ModalHeader>
+                <Heading size="md">Ingresa el usuario</Heading>
+              </ModalHeader>
+              <Input borderColor={errUser}>
+                <InputField
+                  type={'text'}
+                  placeholder="Ingrese el usuario"
+                  onChangeText={value => {
+                    setUser(value);
+                    setErrUser('$coolGray300');
+                    setShowErrUser(false);
+                  }}></InputField>
+              </Input>
+              {showErrUser ? (
+                <Text style={{fontSize: 10, marginTop: 7, marginLeft: 7}}>
+                  Ingresa un usuario
+                </Text>
+              ) : (
+                ''
+              )}
+              <ModalHeader>
+                <Heading size="md">Ingresa el password</Heading>
+              </ModalHeader>
+              <Input borderColor={errPass}>
+                <InputField
+                  type={'text'}
+                  placeholder="Ingrese password"
+                  onChangeText={value => {
+                    setPassword(value);
+                    setErrPass('$coolGray300');
+                    setShowErrPass(false);
+                  }}></InputField>
+              </Input>
+              {showErrPass ? (
+                <Text style={{fontSize: 10, marginTop: 7, marginLeft: 7}}>
+                  Ingresa un password
+                </Text>
+              ) : (
+                ''
+              )}
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                variant="outline"
+                size="sm"
+                action="secondary"
+                mr="$3"
+                onPress={() => {
+                  setShowModal(false);
+                  setErrUser('$coolGray300');
+                  setErrPass('$coolGray300');
+                  setShowErrCat(false);
+                  setSelectedCat('');
+                  setPassword('');
+                  setUser('');
+                  setShowErrUser(false);
+                }}>
+                <ButtonText>Cancel</ButtonText>
+              </Button>
+              <Button
+                size="sm"
+                action="positive"
+                borderWidth="$0"
+                onPress={() => {
+                  catchPost();
+                }}>
+                <ButtonText>Guardar</ButtonText>
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </KeyboardAvoidingView>
       </Modal>
     </Center>
   );

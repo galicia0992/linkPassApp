@@ -90,8 +90,10 @@ const LinksComponent = ({route}: Props) => {
               w={200}
               isDisabled={false}
               isInvalid={false}
-              isReadOnly={true}>
+              isReadOnly={true}
+              >
               <InputField
+              showSoftInputOnFocus={false}
                 placeholder="Enter Text here"
                 value={`${item.category}`}
               />
@@ -108,6 +110,7 @@ const LinksComponent = ({route}: Props) => {
               isInvalid={false}
               isReadOnly={false}>
               <InputField
+              showSoftInputOnFocus={false}
                 placeholder="Enter Text here"
                 value={`${item.link}`}
               />

@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { useState } from 'react'
 import { ChevronDownIcon, Icon, Select, SelectBackdrop, SelectContent, SelectDragIndicator, SelectDragIndicatorWrapper, SelectIcon, SelectInput, SelectItem, SelectPortal, SelectTrigger } from '@gluestack-ui/themed'
-
+import { ScrollView } from '@gluestack-ui/themed'
 interface Props {
   setSelectedCat:any,
   setShowErrCat:any
@@ -25,6 +25,7 @@ const SelectPPass = ({setSelectedCat, setShowErrCat}: Props):JSX.Element => {
         <SelectDragIndicatorWrapper>
           <SelectDragIndicator />
         </SelectDragIndicatorWrapper>
+        <ScrollView width={"100%"}>
         <SelectItem
           label="Dominio"
           value="dom"
@@ -71,6 +72,44 @@ const SelectPPass = ({setSelectedCat, setShowErrCat}: Props):JSX.Element => {
           label="Yahoo"
           value="Yahoo"
         />
+        <SelectItem
+          label="Bancos"
+          value="Bancos"
+          isDisabled={true}
+        />
+        <SelectItem
+          label="Afirme"
+          value="Afirme"
+        />
+        <SelectItem
+          label="Banorte"
+          value="Banorte"
+        />
+        <SelectItem
+          label="Banamex"
+          value="Banamex"
+        />
+        <SelectItem
+          label="BBVA"
+          value="BBVA"
+        />
+        <SelectItem
+          label="HSBC"
+          value="HSBC"
+        />
+        <SelectItem
+          label="Santander"
+          value="Santander"
+        />
+        <SelectItem
+          label="Scotia Bank"
+          value="Scotia Bank"
+        />
+        <SelectItem
+          label="Otro"
+          value="Otro"
+        />
+        </ScrollView>
       </SelectContent>
     </SelectPortal>
   </Select>
